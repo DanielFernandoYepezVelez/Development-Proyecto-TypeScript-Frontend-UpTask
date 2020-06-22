@@ -1,0 +1,13 @@
+.nav {
+    display: flex;
+    color: #ffffff;
+    cursor: pointer;
+    padding: .5rem 1rem;
+    align-items: center;
+    background-color: #455A64;
+    justify-content: space-between;
+}
+
+.nav-item {
+    list-style: none;
+}
