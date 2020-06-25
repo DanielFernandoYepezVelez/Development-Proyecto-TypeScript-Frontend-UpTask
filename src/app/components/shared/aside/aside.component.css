@@ -1,3 +1,41 @@
-/* aside {
-    background-color: aqua;
-} */
+.aside {
+    display: flex;
+    min-height: 87.6vh;
+    align-items: center;
+    flex-direction: column;
+    background-color: #687f8a;
+}
+
+.aside__div__botton {
+    width: 240px;
+    cursor: pointer;
+    margin-top: 3rem;
+    text-align: center;
+    padding: 1rem .5rem;
+    margin-bottom: 7rem;
+    background-color: #fdd835;
+}
+
+.div__botton__link {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-decoration: none;
+}
+
+.div__project__title {
+    color: #fdd835;
+    font-weight: 700;
+    font-size: 1.6rem;
+}
+
+.div__project__item {
+    list-style: none;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: .3rem .5rem;
+}
+
+.div__project__link {
+    color: #ffffff;
+}

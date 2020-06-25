@@ -14,10 +14,11 @@ html {
 
 body {
     font-family: 'Lato', sans-serif;
-    background-color: red;
-    /* min-height: 100vh; */
 }
 
-.clasePrueba {
-    background-color: aqua;
+main {
+    display: grid;
+    grid-template-rows: 87.6vh;
+    grid-template-columns: 300px 1px 1fr;
+    /* grid-template-areas: "sidebar main-content"; */
 }
