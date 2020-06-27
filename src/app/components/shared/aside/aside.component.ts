@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 
+import { IProject } from '../../../models/IProject';
+import { ProjectService } from '../../../services/project.service';
+
 @Component({
   selector: 'app-aside',
   templateUrl: './aside.component.html',
-  styleUrls: ['./aside.component.css']
+  styleUrls: ['./aside.component.css'],
 })
 export class AsideComponent implements OnInit {
+  projects: IProject[] = [];
 
-  constructor() { }
+  constructor(private projectService: ProjectService) {
+    this.projectService.projects('projects').subscribe(
+      (res: any) => {
+        // console.log(res);
 
-  ngOnInit(): void {
+        if (res.ok === true) {
+          this.projects = res.projects;
+          // console.log(this.projects);
+        }
+      },
+      (err) => console.log(err)
+    );
   }
 
+  ngOnInit(): void {}
 }

@@ -1,15 +1,11 @@
 <aside class="aside">
     <div class="aside__div__botton">
-        <a class="div__botton__link" [routerLink]="['newProject']"><i class="fa fa-plus" aria-hidden="true"></i> Crear Proyecto</a>
+        <a class="div__botton__link" [routerLink]="['/newProject']"><i class="fa fa-plus" aria-hidden="true"></i> Crear Proyecto</a>
     </div>
     <div class="aside__div__project">
         <h2 class="div__project__title">Proyectos</h2>
         <ul>
-            <li class="div__project__item"><a class="div__project__link">Proyecto #1</a></li>
-            <li class="div__project__item"><a class="div__project__link">Proyecto #2</a></li>
-            <li class="div__project__item"><a class="div__project__link">Proyecto #3</a></li>
-            <li class="div__project__item"><a class="div__project__link">Proyecto #4</a></li>
-            <li class="div__project__item"><a class="div__project__link">Proyecto #5</a></li>
+            <li *ngFor="let project of projects" class="div__project__item"><a class="div__project__link">{{project.name}}</a></li>
         </ul>
     </div>
 </aside>

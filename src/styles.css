@@ -16,9 +16,17 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-main {
+.landing-one {
     display: grid;
     grid-template-rows: 87.6vh;
-    grid-template-columns: 300px 1px 1fr;
-    /* grid-template-areas: "sidebar main-content"; */
+    grid-template-columns: 300px 1fr;
+}
+
+.landing-two {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #455A64;
 }
