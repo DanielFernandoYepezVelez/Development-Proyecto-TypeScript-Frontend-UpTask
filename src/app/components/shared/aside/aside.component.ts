@@ -14,11 +14,9 @@ export class AsideComponent implements OnInit {
   constructor(private projectService: ProjectService) {
     this.projectService.projects('projects').subscribe(
       (res: any) => {
-        // console.log(res);
-
+        console.log(res);
         if (res.ok === true) {
           this.projects = res.projects;
-          // console.log(this.projects);
         }
       },
       (err) => console.log(err)
@@ -26,4 +24,9 @@ export class AsideComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  requestAgain(evento) {
+    // console.log('evento =>', evento);
+    this.projects = evento;
+  }
 }
