@@ -25,7 +25,7 @@ export class SigninComponent implements OnInit {
 
         if (res.ok === true) {
           localStorage.setItem('tokenUser', JSON.stringify(res.tokenUser));
-          this.router.navigate(['/newProject']);
+          this.router.navigate(['/homeProjects']);
         }
       },
       (err) => console.log(err)

@@ -25,7 +25,6 @@ export class ProjectComponent implements OnInit {
     this.projectService.createProject('newproject', this.nameProject).subscribe(
       (res: any) => {
         // console.log(res);
-
         if (res.ok === true) {
           this.nameProject.name = '';
           this.againProjects();
@@ -33,6 +32,8 @@ export class ProjectComponent implements OnInit {
       },
       (err) => console.log(err)
     );
+
+    return false;
   }
 
   againProjects() {

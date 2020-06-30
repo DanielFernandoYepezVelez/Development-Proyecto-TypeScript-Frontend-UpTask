@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { IProject } from '../../../models/IProject';
 import { ProjectService } from '../../../services/project.service';
@@ -11,10 +12,10 @@ import { ProjectService } from '../../../services/project.service';
 export class AsideComponent implements OnInit {
   projects: IProject[] = [];
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService, private router: Router) {
     this.projectService.projects('projects').subscribe(
       (res: any) => {
-        console.log(res);
+        // console.log(res);
         if (res.ok === true) {
           this.projects = res.projects;
         }
@@ -28,5 +29,7 @@ export class AsideComponent implements OnInit {
   requestAgain(evento) {
     // console.log('evento =>', evento);
     this.projects = evento;
+    this.router.navigate(['/homeProjects']);
+    return false;
   }
 }

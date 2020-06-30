@@ -30,3 +30,113 @@ body {
     justify-content: center;
     background-color: #455A64;
 }
+
+
+/* ------------------------------------------------------ */
+
+
+/* Aside */
+
+.aside {
+    display: flex;
+    min-height: 87.6vh;
+    align-items: center;
+    flex-direction: column;
+    background-color: #687f8a;
+}
+
+.aside__div__botton {
+    width: 240px;
+    cursor: pointer;
+    margin-top: 3rem;
+    text-align: center;
+    padding: 1rem .5rem;
+    margin-bottom: 6rem;
+    background-color: #fdd835;
+}
+
+.div__botton__link {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-decoration: none;
+}
+
+.div__project__title {
+    color: #fdd835;
+    font-weight: 700;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.div__project__item {
+    padding: .4rem;
+    outline: none;
+    list-style: none;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.div__project__link {
+    cursor: pointer;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.div__project__link:hover {
+    color: #fdd835 !important;
+}
+
+
+/* ------------------------------------------------------ */
+
+
+/* Some Titles */
+
+.titles {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+
+/* ------------------------------------------------------ */
+
+
+/* Main Content */
+
+.div__new__project {
+    display: flex;
+    text-align: end;
+    align-items: center;
+    flex-direction: column;
+}
+
+.div__new__project__form {
+    padding: 1rem .5rem;
+    width: 58%;
+    min-width: 200px;
+    border-radius: 5px;
+    background-color: #607d8b;
+}
+
+.div__new__project__form input[type="text"] {
+    width: 100%;
+    height: 3rem;
+    color: black;
+    outline: none;
+    padding-left: 1rem;
+    border-radius: 5rem;
+    border: 1px solid #455a64;
+}
+
+.div__new__project__form input[type="submit"] {
+    padding: 1rem;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 1rem 0 0 0;
+    border-radius: 5px;
+    background-color: #fdd835;
+}

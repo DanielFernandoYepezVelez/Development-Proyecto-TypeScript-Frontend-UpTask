@@ -5,13 +5,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
-import { NewTaskComponent } from './components/new-task/new-task.component';
+import { EditProjectComponent } from './components/edit-project/edit-project.component';
+import { ListProjectComponent } from './components/list-project/list-project.component';
+import { HomeProjectsComponent } from './components/home-projects/home-projects.component';
 
 const routes: Routes = [
   { path: 'signIn', component: SigninComponent },
   { path: 'signUp', component: SignupComponent },
   { path: 'newProject', component: NewProjectComponent },
-  { path: 'newTask/:url', component: NewTaskComponent },
+  { path: 'homeProjects', component: HomeProjectsComponent },
+  {
+    path: 'editProject/:project_url/:project_id',
+    component: EditProjectComponent,
+  },
+  {
+    path: 'listProject/:project_url/:project_name/:project_id',
+    component: ListProjectComponent,
+  },
   { path: '', redirectTo: '/signUp', pathMatch: 'full' },
 ];
 

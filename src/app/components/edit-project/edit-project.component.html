@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+
+<div class="landing-one">
+    <aside class="aside">
+        <div class="aside__div__botton">
+            <a class="div__botton__link" [routerLink]="['/newProject']"><i class="fa fa-plus" aria-hidden="true"></i> Crear Proyecto</a>
+        </div>
+        <div class="aside__div__project">
+            <h2 class="div__project__title">Proyectos</h2>
+            <ul>
+                <li *ngFor="let project of projects" routerLink="/listProject/{{project.url}}/{{project.name}}/{{project.id}}" class="div__project__item"><a class="div__project__link">{{project.name}}</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="div__new__project">
+        <h1>Editar Proyecto</h1>
+        <form (submit)="updateProject($event)" class="div__new__project__form">
+            <input [(ngModel)]="projectNameOutput.name" [value]="projectName" type="text" name="nameProject" id="nameProject" placeholder="Nombre Proyecto">
+            <input type="submit" value="Guardar">
+        </form>
+    </div>
+</div>
+
+<app-footer></app-footer>

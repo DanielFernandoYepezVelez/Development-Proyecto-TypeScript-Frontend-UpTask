@@ -6,7 +6,7 @@
         <div class="aside__div__project">
             <h2 class="div__project__title">Proyectos</h2>
             <ul>
-                <li *ngFor="let project of projects" routerLink="/newTask/{{project.url}}" class="div__project__item"><a class="div__project__link">{{project.name}}</a></li>
+                <li *ngFor="let project of projects" routerLink="/listProject/{{project.url}}/{{project.name}}/{{project.id}}" class="div__project__item"><a class="div__project__link">{{project.name}}</a></li>
             </ul>
         </div>
     </aside>

@@ -12,16 +12,19 @@ import { ProjectComponent } from './components/project/project.component';
 import { AsideComponent } from './components/shared/aside/aside.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { NewTaskComponent } from './components/new-task/new-task.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
+import { ListProjectComponent } from './components/list-project/list-project.component';
+import { EditProjectComponent } from './components/edit-project/edit-project.component';
+import { HomeProjectsComponent } from './components/home-projects/home-projects.component';
 
 /* Rutas */
 import { AppRoutingModule } from './app.routing';
 
 /* Services */
-import { ProjectService } from './services/project.service';
 import { TaskService } from './services/task.service';
 import { UserService } from './services/user.service';
-import { NewTaskComponent } from './components/new-task/new-task.component';
+import { ProjectService } from './services/project.service';
 
 @NgModule({
   declarations: [
@@ -33,8 +36,11 @@ import { NewTaskComponent } from './components/new-task/new-task.component';
     FooterComponent,
     NavbarComponent,
     ProjectComponent,
-    NewProjectComponent,
     NewTaskComponent,
+    NewProjectComponent,
+    ListProjectComponent,
+    EditProjectComponent,
+    HomeProjectsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [ProjectService, TaskService, UserService],

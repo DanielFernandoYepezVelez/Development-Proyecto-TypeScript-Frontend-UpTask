@@ -1,0 +1,27 @@
+.links {
+    display: flex;
+    margin-top: 2rem;
+    justify-content: space-around;
+}
+
+.link__all {
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.link__edit__button {
+    color: #000000;
+    background-color: #fdd835;
+}
+
+.link__delete__button {
+    color: #ffffff;
+    background-color: rgb(253, 0, 0);
+}
+
+.links a {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none;
+}
