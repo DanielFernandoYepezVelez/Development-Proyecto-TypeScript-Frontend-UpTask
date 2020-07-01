@@ -1,7 +1,8 @@
 .links {
     display: flex;
     margin-top: 2rem;
-    justify-content: space-around;
+    margin-bottom: 1rem;
+    justify-content: center;
 }
 
 .link__all {
@@ -13,6 +14,7 @@
 .link__edit__button {
     color: #000000;
     background-color: #fdd835;
+    margin-right: 11.8rem;
 }
 
 .link__delete__button {

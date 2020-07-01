@@ -15,6 +15,13 @@
 
     <main>
         <h2 class="titles">{{title}} - {{titleProject}}</h2>
+
+        <!-- Formulario Tarea -->
+        <app-new-task></app-new-task>
+
+        <!-- Listado Pendientes -->
+        <app-tasks></app-tasks>
+
         <div class="links">
             <a class="link__all link__edit__button" routerLink="/editProject/{{urlProject}}/{{idProject}}">Editar Proyecto <i class="fas fa-edit"></i></a>
             <a class="link__all link__delete__button" (click)="deleteProject($event)">Eliminar Proyecto <i class="fas fa-trash-alt"></i></a>

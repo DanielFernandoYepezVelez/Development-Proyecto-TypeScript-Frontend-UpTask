@@ -52,6 +52,16 @@ export class ProjectService {
     return this.http.put(url, nameProject, { headers });
   }
 
+  private deleteQuery(query: string, projectUrl: string, projectid: string) {
+    const url = `http://localhost:3001/api/${query}/${projectUrl}/${projectid}`;
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenUser'))}`,
+    });
+
+    return this.http.delete(url, { headers });
+  }
+
   projects(query: string) {
     return this.getQuery(query);
   }
@@ -71,5 +81,9 @@ export class ProjectService {
     body: object
   ) {
     return this.putQuery(query, projectUrl, projectid, body);
+  }
+
+  deleteProject(query: string, projectUrl: string, projectid: string) {
+    return this.deleteQuery(query, projectUrl, projectid);
   }
 }

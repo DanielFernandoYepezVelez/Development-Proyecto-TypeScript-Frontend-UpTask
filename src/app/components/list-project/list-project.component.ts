@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { IProject } from '../../models/IProject';
@@ -19,7 +19,8 @@ export class ListProjectComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private activatedRouter: ActivatedRoute
+    private activatedRouter: ActivatedRoute,
+    private router: Router
   ) {
     this.projectService.projects('projects').subscribe(
       (res: any) => {
@@ -44,7 +45,32 @@ export class ListProjectComponent implements OnInit {
 
   deleteProject(e) {
     e.preventDefault();
-    Swal.fire('Eliminando Proyecto!');
-    console.log('Eliminado Proyecto');
+
+    Swal.fire({
+      title: '¿Eliminar Proyecto?',
+      text: 'Todo Proyecto Eliminado No Se Puede Recuperar!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar!',
+    }).then((result) => {
+      if (result.value) {
+        this.projectService
+          .deleteProject('project', this.urlProject, this.idProject)
+          .subscribe(
+            (res) => {
+              // console.log(res);
+            },
+            (err) => console.log(err)
+          );
+
+        Swal.fire('Eliminado!', 'Tu Proyecto Fue Eliminado.', 'success');
+
+        setTimeout(() => {
+          this.router.navigate(['/homeProjects']);
+        }, 1000);
+      }
+    });
   }
 }

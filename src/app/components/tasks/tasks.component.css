@@ -1,0 +1,85 @@
+.listado-pendientes {
+    width: 58%;
+    padding: 2rem;
+    border-radius: 5px;
+    /* max-width: 800px; */
+    margin: 2rem auto 0 auto;
+    border: 1px solid #999;
+    background-color: #f2f2f2;
+}
+
+.listado-pendientes ul {
+    padding: 0;
+    list-style: none;
+}
+
+.listado-pendientes ul li {
+    margin-bottom: .5rem;
+}
+
+.listado-pendientes ul li {
+    display: flex;
+    font-size: 1.4rem;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.listado-pendientes ul li:last-of-type {
+    border-bottom: none;
+}
+
+.listado-pendientes ul li i {
+    cursor: pointer;
+}
+
+.acciones i:last-child {
+    margin-left: 3rem;
+}
+
+.circule {
+    margin-right: 1rem;
+}
+
+.completo {
+    color: #00b762;
+}
+
+.alerta {
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 30px;
+    /* max-width: 300px; */
+    max-width: max-content;
+    /* font-size: 0.9rem; */
+    margin: 0 auto 0.5rem auto;
+    text-transform: uppercase;
+}
+
+.error {
+    color: red !important;
+    border: 1px solid red;
+    background-color: rgb(255, 201, 201);
+}
+
+.error p {
+    color: red !important;
+}
+
+.correcto {
+    padding: 0.5rem;
+    color: green;
+    font-weight: 700;
+    border-radius: 30px;
+    max-width: max-content;
+    border: 1px solid green;
+    text-transform: uppercase;
+    margin: 0 auto 0.5rem auto;
+    background-color: rgb(53, 163, 53);
+}
+
+.correcto p {
+    color: #ffffff;
+}

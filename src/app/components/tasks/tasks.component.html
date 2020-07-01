@@ -1,1 +1,34 @@
-<p>tasks works!</p>
+<div class="listado-pendientes">
+    <ul>
+        <li *ngFor="let itemTask of tasks">
+            <div *ngIf="(tasks.length <= 0)">
+                <p>No Hay Tareas Pendientes</p>
+            </div>
+            <div *ngIf="(tasks.length > 0)">
+                <p>{{itemTask.task}}</p>
+            </div>
+            <div>
+                <p>
+                    <i class="circule far fa-check-circle"></i>
+                    <i class="fas fa-trash"></i>
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- .listado-pendientes
+      ul
+        if tasks.length
+          each task in tasks
+            li.tarea(data-task=projectOne.url+':'+task.id)
+              p= task.task
+              .acciones
+                if task.state
+                  i.far.fa-check-circle.completo
+                else
+                  i.far.fa-check-circle
+                i.fas.fa-trash
+        else
+          p No Hay Tareas En Este Proyecto
+ -->
