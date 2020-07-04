@@ -1,34 +1,25 @@
+<!-- Formulario Tarea (HIJO) -->
+<app-new-task (tasksAgain)="tasksSecond($event)"></app-new-task>
+
 <div class="listado-pendientes">
     <ul>
+        <div *ngIf="template === 0">
+            <p [ngStyle]="{'fontSize': '1.4rem'}">No Hay Tareas Pendientes</p>
+        </div>
         <li *ngFor="let itemTask of tasks">
-            <div *ngIf="(tasks.length <= 0)">
-                <p>No Hay Tareas Pendientes</p>
-            </div>
-            <div *ngIf="(tasks.length > 0)">
-                <p>{{itemTask.task}}</p>
+            <div>
+                <p>{{ itemTask.task }}</p>
             </div>
             <div>
-                <p>
-                    <i class="circule far fa-check-circle"></i>
-                    <i class="fas fa-trash"></i>
-                </p>
+                <ng-container *ngIf="itemTask.state === 1">
+                    <i (click)="taskUpdate($event, itemTask.id)" class="circule far fa-check-circle completo"></i>
+                    <i (click)="taskDelete($event, itemTask.id)" class="fas fa-trash"></i>
+                </ng-container>
+                <ng-container *ngIf="itemTask.state === 0">
+                    <i (click)="taskUpdate($event, itemTask.id)" class="circule far fa-check-circle"></i>
+                    <i (click)="taskDelete($event, itemTask.id)" class="fas fa-trash"></i>
+                </ng-container>
             </div>
         </li>
     </ul>
 </div>
-
-<!-- .listado-pendientes
-      ul
-        if tasks.length
-          each task in tasks
-            li.tarea(data-task=projectOne.url+':'+task.id)
-              p= task.task
-              .acciones
-                if task.state
-                  i.far.fa-check-circle.completo
-                else
-                  i.far.fa-check-circle
-                i.fas.fa-trash
-        else
-          p No Hay Tareas En Este Proyecto
- -->

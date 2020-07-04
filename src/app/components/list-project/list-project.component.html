@@ -3,30 +3,38 @@
 <div class="landing-one">
     <aside class="aside">
         <div class="aside__div__botton">
-            <a class="div__botton__link" [routerLink]="['/newProject']"><i class="fa fa-plus" aria-hidden="true"></i> Crear Proyecto</a>
-        </div>
-        <div class="aside__div__project">
-            <h2 class="div__project__title">Proyectos</h2>
-            <ul>
-                <li *ngFor="let project of projects" routerLink="/listProject/{{project.url}}/{{project.name}}/{{project.id}}" class="div__project__item"><a class="div__project__link">{{project.name}}</a></li>
+            <a class="div__botton__link" [routerLink]="['/newProject']"><i class="fa fa-plus" aria-hidden="true"></i> Crear Proyecto</a
+      >
+    </div>
+    <div class="aside__div__project">
+      <h2 class="div__project__title">Proyectos</h2>
+      <ul>
+        <li
+          *ngFor="let project of projects"
+          (click)="getProjectUrl($event, project.url, project.name, project.id)"
+          class="div__project__item"
+        >
+          <a class="div__project__link">{{ project.name }}</a>
+            </li>
             </ul>
         </div>
     </aside>
 
     <main>
-        <h2 class="titles">{{title}} - {{titleProject}}</h2>
-
-        <!-- Formulario Tarea -->
-        <app-new-task></app-new-task>
+        <h2 class="titles">{{ title }} - {{ titleProject }}</h2>
 
         <!-- Listado Pendientes -->
         <app-tasks></app-tasks>
 
         <div class="links">
-            <a class="link__all link__edit__button" routerLink="/editProject/{{urlProject}}/{{idProject}}">Editar Proyecto <i class="fas fa-edit"></i></a>
-            <a class="link__all link__delete__button" (click)="deleteProject($event)">Eliminar Proyecto <i class="fas fa-trash-alt"></i></a>
+            <a class="link__all link__edit__button" routerLink="/editProject/{{ urlProject }}/{{ idProject }}">Editar Proyecto <i class="fas fa-edit"></i
+      ></a>
+            <a class="link__all link__delete__button" (click)="deleteProject($event)">Eliminar Proyecto <i class="fas fa-trash-alt"></i
+      ></a>
         </div>
     </main>
 </div>
 
 <app-footer></app-footer>
+
+<!-- routerLink="/listProject/{{project.url}}/{{project.name}}/{{project.id}}" -->

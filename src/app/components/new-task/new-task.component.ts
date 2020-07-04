@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { TaskService } from '../../services/task.service';
+
 import { ITask } from '../../models/ITask';
 
 @Component({
@@ -10,21 +11,20 @@ import { ITask } from '../../models/ITask';
   styleUrls: ['./new-task.component.css'],
 })
 export class NewTaskComponent implements OnInit {
-  urlProject: string;
-  nameProject: string;
   idProject: string;
   valueTask: ITask = { task: '' };
+  /* Emitir Evento Del Hijo(app-new-task) Al Padre(app-tasks) Para Compartir Las Nuevas Tareas En La Vista Principal */
+  @Output() tasksAgain: EventEmitter<ITask[]>;
 
   constructor(
     private activatedRouter: ActivatedRoute,
-    private taskService: TaskService,
-    private router: Router
+    private taskService: TaskService
   ) {
-    this.activatedRouter.params.subscribe((params) => {
-      const { project_url, project_name, project_id } = params;
+    this.tasksAgain = new EventEmitter();
 
-      this.urlProject = project_url;
-      this.nameProject = project_name;
+    this.activatedRouter.params.subscribe((params) => {
+      const { project_id } = params;
+
       this.idProject = project_id;
     });
   }
@@ -37,12 +37,25 @@ export class NewTaskComponent implements OnInit {
       .createTask('newTask', this.idProject, this.valueTask)
       .subscribe(
         (res: any) => {
-          console.log(res);
+          // console.log(res);
           if (res.ok) {
-            this.router.navigate([`/homeProjects`]);
+            this.valueTask.task = '';
+            this.resquestTasksAgain();
           }
         },
         (err) => console.log(err)
       );
+  }
+
+  resquestTasksAgain() {
+    this.taskService.getTasks('tasks', this.idProject).subscribe(
+      (res: any) => {
+        // console.log(res);
+        if (res.ok) {
+          this.tasksAgain.emit(res.tasks);
+        }
+      },
+      (err) => console.log(err)
+    );
   }
 }

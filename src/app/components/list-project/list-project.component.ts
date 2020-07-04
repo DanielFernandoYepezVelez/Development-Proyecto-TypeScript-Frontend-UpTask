@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
-import { IProject } from '../../models/IProject';
 import { ProjectService } from '../../services/project.service';
+
+import { IProject } from '../../models/IProject';
 
 @Component({
   selector: 'app-list-project',
@@ -35,6 +36,7 @@ export class ListProjectComponent implements OnInit {
     /* Obtener Parametros Por La Url */
     this.activatedRouter.params.subscribe((params) => {
       const { project_url, project_name, project_id } = params;
+
       this.titleProject = project_name;
       this.urlProject = project_url;
       this.idProject = project_id;
@@ -42,6 +44,22 @@ export class ListProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  getProjectUrl(e, projectUrl, projectName, projectId) {
+    e.preventDefault();
+
+    this.projectService.project('project/url', projectUrl).subscribe(
+      (res: any) => {
+        // console.log(res);
+        if (res.ok) {
+          this.router.navigate([
+            `/listProject/${projectUrl}/${projectName}/${projectId}`,
+          ]);
+        }
+      },
+      (err) => console.log(err)
+    );
+  }
 
   deleteProject(e) {
     e.preventDefault();
