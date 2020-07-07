@@ -15,6 +15,7 @@ export class TasksComponent implements OnInit {
   idProject: string;
   tasks: ITask[] = [];
   template: number;
+  avance = 0;
 
   constructor(
     private activatedRouter: ActivatedRoute,
@@ -37,6 +38,7 @@ export class TasksComponent implements OnInit {
         if (res.ok) {
           this.tasks = res.tasks;
           this.template = res.tasks.length;
+          this.logicaBarraAvance();
         }
       },
       (err) => console.log(err)
@@ -92,5 +94,29 @@ export class TasksComponent implements OnInit {
       },
       (err) => console.log(err)
     );
+  }
+
+  logicaBarraAvance() {
+    let countTareasCompletadas = 0;
+    const tareasExistentes = this.template;
+
+    /* Seleccionar El Numero de tareas */
+    // console.log('tareas existentes', tareasExistentes);
+
+    /* Seleccionar Las Tareas Completadas */
+    this.tasks.forEach((task) => {
+      if (task.state === 1) {
+        countTareasCompletadas += 1;
+      }
+    });
+    // console.log('Tareas Completadas', countTareasCompletadas);
+
+    /* Calcular El Avance Total Del Proyecto (Regla De Tres)*/
+    this.avance = Math.round((countTareasCompletadas / tareasExistentes) * 100);
+    // console.log('Avance Del Proyecto', this.avance);
+
+    /* Mostrar El Avance */
+    /* Estilos en linea y para una sola propiedad de un bloque css */
+    // [style.width.%]="avance"
   }
 }
