@@ -5,7 +5,7 @@
 }
 
 .container__signup {
-    padding: 1rem;
+    padding: .5rem;
     border-radius: 5px;
     background-color: white;
 }
@@ -41,6 +41,19 @@ input[type="password"] {
 }
 
 .signup__div a {
-    text-decoration: none;
     color: #000000;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+
+/* Media Queries SignUp*/
+
+@media all and (min-width: 420px) {
+    .container__signup {
+        padding: 1rem;
+    }
+    .container__signup a {
+        font-size: 1.5rem;
+    }
 }

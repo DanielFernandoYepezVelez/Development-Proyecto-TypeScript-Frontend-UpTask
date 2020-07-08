@@ -5,7 +5,7 @@
 }
 
 .container__signin {
-    padding: 1rem;
+    padding: .5rem;
     border-radius: 5px;
     background-color: white;
 }
@@ -42,4 +42,16 @@ input[type="password"] {
 .signin__div a {
     text-decoration: none;
     color: #000000;
+}
+
+
+/* Media Queries SignIn*/
+
+@media all and (min-width: 420px) {
+    .container__signin {
+        padding: 1rem;
+    }
+    .container__signin a {
+        font-size: 1.2rem;
+    }
 }

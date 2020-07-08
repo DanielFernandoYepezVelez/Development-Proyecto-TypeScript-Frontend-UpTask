@@ -1,19 +1,49 @@
 .nav {
     display: flex;
     color: #ffffff;
-    padding: .5rem 1rem;
+    padding: .5rem .5rem;
     align-items: center;
     background-color: #455A64;
     justify-content: space-between;
 }
 
+.nav h2 {
+    text-align: center;
+    font-size: 1rem;
+}
+
 .nav-item {
     list-style: none;
+    width: 93px;
 }
 
 .nav-item a {
     cursor: pointer;
     color: #ffffff;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
+}
+
+
+/* Media Queries NavBar */
+
+@media all and (min-width: 350px) {
+    .nav h2 {
+        font-size: 1.1rem;
+    }
+}
+
+@media all and (min-width: 769px) {
+    .nav {
+        padding: 1rem 1rem;
+    }
+    .nav h2 {
+        font-size: 1.2rem;
+    }
+    .nav-item {
+        width: auto;
+    }
+    .nav-item a {
+        font-size: 1.2rem;
+    }
 }
