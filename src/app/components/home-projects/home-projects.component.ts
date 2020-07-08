@@ -25,4 +25,6 @@ export class HomeProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  close() {}
 }

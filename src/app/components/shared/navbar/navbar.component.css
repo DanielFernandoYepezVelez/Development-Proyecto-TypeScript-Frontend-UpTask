@@ -9,27 +9,33 @@
 
 .nav h2 {
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.4rem;
 }
 
 .nav-item {
     list-style: none;
-    width: 93px;
+    width: 144px;
 }
 
 .nav-item a {
     cursor: pointer;
     color: #ffffff;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.4rem;
 }
 
 
 /* Media Queries NavBar */
 
-@media all and (min-width: 350px) {
-    .nav h2 {
-        font-size: 1.1rem;
+@media all and (min-width: 320px) {
+    header {
+        width: 506px;
+    }
+}
+
+@media all and (min-width: 508px) {
+    header {
+        width: auto;
     }
 }
 
@@ -37,13 +43,7 @@
     .nav {
         padding: 1rem 1rem;
     }
-    .nav h2 {
-        font-size: 1.2rem;
-    }
     .nav-item {
         width: auto;
-    }
-    .nav-item a {
-        font-size: 1.2rem;
     }
 }
