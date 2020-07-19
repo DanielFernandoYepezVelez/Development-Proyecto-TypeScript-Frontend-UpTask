@@ -8,6 +8,7 @@
     padding: .5rem;
     border-radius: 5px;
     background-color: white;
+    width: 100%;
 }
 
 .container__signin input[type="email"],
@@ -40,12 +41,14 @@ input[type="password"] {
 }
 
 .signin__div a {
-    text-decoration: none;
     color: #000000;
+    font-size: 1.2rem;
+    margin-left: 1.5rem;
+    text-decoration: none;
 }
 
 
-/* Media Queries SignIn*/
+/* MEDIA QUERIES */
 
 @media all and (min-width: 420px) {
     .container__signin {
@@ -53,5 +56,17 @@ input[type="password"] {
     }
     .container__signin a {
         font-size: 1.2rem;
+    }
+}
+
+@media all and (min-width: 600px) {
+    .container__signin {
+        width: 60%;
+    }
+}
+
+@media all and (min-width: 900px) {
+    .container__signin {
+        width: 50%;
     }
 }

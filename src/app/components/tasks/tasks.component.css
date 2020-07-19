@@ -1,9 +1,9 @@
 .listado-pendientes {
-    width: 58%;
+    width: 94%;
     padding: 2rem;
     border-radius: 5px;
     /* max-width: 800px; */
-    margin: 2rem auto 0 auto;
+    margin: 1rem auto 0 auto;
     border: 1px solid #999;
     background-color: #f2f2f2;
 }
@@ -82,4 +82,14 @@
 
 .correcto p {
     color: #ffffff;
+}
+
+
+/* MEDIA QUERIES */
+
+@media all and (min-width: 768px) {
+    .listado-pendientes {
+        width: 58%;
+        margin: 2rem auto 0 auto;
+    }
 }
