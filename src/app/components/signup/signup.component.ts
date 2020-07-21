@@ -21,13 +21,16 @@ export class SignupComponent implements OnInit {
 
     this.userService.signUp(this.user).subscribe(
       (res: any) => {
-        console.log(res);
-
+        // console.log(res);
         if (res.ok === true) {
-          this.router.navigate(['/signIn']);
+          setTimeout(() => {
+            this.router.navigate(['/signIn']);
+          }, 1000);
         }
       },
-      (err) => console.log(err)
+      (err) => {
+        console.log(err);
+      }
     );
   }
 }
