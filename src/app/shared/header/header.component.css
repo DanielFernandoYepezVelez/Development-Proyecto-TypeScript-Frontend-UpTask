@@ -1,0 +1,27 @@
+.header {
+    padding: 1rem;
+}
+
+.header__container {
+    display: grid;
+    justify-items: end;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.header__paragraph {
+    justify-self: start;
+}
+
+.header__figure {
+    position: relative;
+}
+
+.header__ul {
+    list-style: none;
+    position: absolute;
+}
+
+.header__item {
+    text-decoration: none;
+}

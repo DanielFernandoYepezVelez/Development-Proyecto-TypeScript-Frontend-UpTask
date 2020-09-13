@@ -1,0 +1,36 @@
+:root {
+    --darkColor: #000000;
+    --botonColor: #93AFD7;
+    --lightColor: #ffffff;
+    --secundaryLetter: 'Roboto', sans-serif;
+    --primaryLetter: 'Fjalla One', sans-serif;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, 
+*::before, 
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    font-family: var(--primaryLetter), var(--secundaryLetter), sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+h1, h2, h3, a, input, label, p, span, button {    
+    font-weight: 300;
+    color: var(--lightColor);
+}
+
+a {
+    text-decoration: none;
+}
