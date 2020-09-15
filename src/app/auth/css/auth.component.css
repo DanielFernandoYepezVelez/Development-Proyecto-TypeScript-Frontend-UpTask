@@ -1,12 +1,12 @@
 .auth__container {
     display: grid;
     padding: 0.5rem 1rem;
-    height: 100vh;
+    min-height: 100vh;
     align-items: center;
     justify-items: center;
-    background: rgb(57,200,166);
+    background: rgb(57, 200, 166);
     grid-template-rows: 3.5rem auto;
-    background: linear-gradient(180deg, rgba(57,200,166,1) 1%, rgba(52,143,190,1) 37%, rgba(71, 130, 186) 71%, rgba(99,107,221,1) 100%);
+    background: linear-gradient(180deg, rgba(57, 200, 166, 1) 1%, rgba(52, 143, 190, 1) 37%, rgba(71, 130, 186) 71%, rgba(99, 107, 221, 1) 100%);
 }
 
 .auth__header {
@@ -30,9 +30,9 @@
     padding: 4.5rem 1rem 2rem;
     border-radius: 40px;
     border: solid 2px var(--lightColor);
-    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.46);
-    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.46);
-    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.46);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.46);
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.46);
 }
 
 .main__h2 {
@@ -45,20 +45,38 @@
     flex-direction: column;
 }
 
-.main__form input[type="text"]{
+.main__form input[type="text"] {
+    width: 100%;
     border: none;
+    outline: none;
     margin-bottom: 2rem;
+    padding-left: .5rem;
     background-color: inherit;
-    border-bottom: 2px solid var(--lightColor);   
+    border-bottom: 2px solid var(--lightColor);
+}
+
+.campo {
+    display: inherit;
+    position: relative;
 }
 
 .main__form label {
-    margin-left: 0.5rem;
-    margin-bottom: -0.5rem;
+    top: -0.7rem;
+    left: .5rem;
+    opacity: .6;
+    position: absolute;
+    transition: font-size .2s ease, top .2s ease;
+}
+
+.label__finally,
+.main__form input[type="text"]:focus+label {
+    top: -0.7rem;
+    font-size: .5rem;
 }
 
 .main__form button[type="submit"] {
     border: none;
+    outline: none;
     padding: 1rem;
     cursor: pointer;
     font-size: 1.2rem;
@@ -92,9 +110,10 @@
     font-size: 1.5rem;
 }
 
+
 /* MEDIA QUERYS GENERALS */
 
-@media all and (min-width: 335px) {    
+@media all and (min-width: 335px) {
     .main__auth {
         width: 306px;
     }
@@ -104,7 +123,6 @@
     .auth__paragraph {
         font-size: 1.2rem;
     }
-        
     .main__auth {
         width: 339px;
         padding: 4rem 3rem 3rem;
@@ -117,17 +135,15 @@
     }
 }
 
-@media all and (min-width: 768px) {   
+@media all and (min-width: 768px) {
     .auth__image {
         width: 65px;
         height: 65px;
     }
-    
     .auth__paragraph {
         font-size: 1.5rem;
     }
-    
     .main__auth {
         padding: 4rem 3rem 3rem;
-    }    
+    }
 }

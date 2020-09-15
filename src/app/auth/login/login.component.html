@@ -10,11 +10,15 @@
         <h2 class="main__h2">Inicia Sesión</h2>
 
         <form action="#" class="main__form">
-            <label for="#">Correo</label>
-            <input type="text">
+            <div class="campo">
+                <input type="text" id="email" (click)="inputEmail()">
+                <label for="#">Correo</label>
+            </div>
 
-            <label for="#">Contraseña</label>
-            <input type="text">
+            <div class="campo">
+                <input type="text" id="password" (click)="inputPassword()">
+                <label for="#">Contraseña</label>
+            </div>
 
             <button type="submit">Iniciar Sesión</button>
         </form>
@@ -31,6 +35,6 @@
             <p><i class="fab fa-twitter"></i><a href="#"> Inicia Sesión Con Twitter</a></p>
         </div>
 
-        <p>No Tienes Ninguna Cuenta <a href="">Regístrate</a></p>
+        <p>No Tienes Ninguna Cuenta <a [routerLink]="['/register']">Regístrate</a></p>
     </main>
 </div>
