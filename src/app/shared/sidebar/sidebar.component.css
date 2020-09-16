@@ -1,0 +1,42 @@
+.aside {
+    height: 84vh;
+    padding: 1rem;
+    border: solid 2px var(--lightColor);
+    border-top: none;
+    border-bottom: none;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.46);
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.46);
+}
+
+.aside__bottom {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 1rem;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 20px;
+    margin: 1.5rem 0 2.5rem 0;
+    text-transform: uppercase;
+    background-color: var(--darkColor);
+}
+
+.aside__projects h1 {
+    text-align: center;
+    color: var(--darkColor);
+}
+
+.aside__list {
+    padding-left: 0.5rem;
+}
+
+.aside__list p {
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    transition: all 1s ease;
+}
+
+.aside__list p:hover {
+    color: black;
+}

@@ -1,0 +1,52 @@
+.header {
+    padding: 1rem;
+}
+
+.main {
+    height: 600px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.main__article {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.main__image img {
+    width: 330px;
+    min-height: 330px;
+}
+
+.main__section h1 {
+    font-size: 1.9rem;
+}
+
+.section__paragraph {
+    width: 217px;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.section__bottom {
+    width: 180px;
+    padding: 1rem;
+    cursor: pointer;
+    text-align: center;
+    background-color: var(--darkColor);
+}
+
+
+/* MEDIA QUERYS GENERALS */
+
+@media all and (min-width: 920px) {
+    .main__article {
+        grid-template-columns: 400px 400px;
+    }
+    .main__image img {
+        width: 370px;
+        min-height: 370px;
+    }
+}

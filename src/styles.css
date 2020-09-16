@@ -10,8 +10,8 @@ html {
     box-sizing: border-box;
 }
 
-*, 
-*::before, 
+*,
+*::before,
 *::after {
     margin: 0;
     padding: 0;
@@ -19,14 +19,25 @@ html {
 }
 
 body {
+    min-height: 100vh;
+    background: rgb(57, 200, 166);
     font-family: var(--primaryLetter), var(--secundaryLetter), sans-serif;
+    background: linear-gradient(180deg, rgba(57, 200, 166, 1) 1%, rgba(52, 143, 190, 1) 37%, rgba(71, 130, 186) 71%, rgba(99, 107, 221, 1) 100%);
 }
 
 img {
     max-width: 100%;
 }
 
-h1, h2, h3, a, input, label, p, span, button {    
+h1,
+h2,
+h3,
+a,
+input,
+label,
+p,
+span,
+button {
     font-weight: 300;
     color: var(--lightColor);
 }

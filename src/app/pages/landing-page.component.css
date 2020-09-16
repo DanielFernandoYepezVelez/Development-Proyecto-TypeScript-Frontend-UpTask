@@ -1,0 +1,7 @@
+.main__dashboard {
+    display: grid;
+    grid-column-gap: 2rem;
+    grid-template-columns: 230px auto;
+    grid-template-rows: 84vh;
+    border: solid 1px var(--lightColor);
+}

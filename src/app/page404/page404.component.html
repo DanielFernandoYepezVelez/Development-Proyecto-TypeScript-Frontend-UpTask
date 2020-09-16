@@ -1,1 +1,24 @@
-<p>page404 works!</p>
+<div class="container__404">
+    <header class="header">
+        <h2>404 NOT FOUND</h2>
+    </header>
+
+    <main class="main">
+        <article class="main__article">
+            <section>
+                <figure class="main__image">
+                    <img src="./assets/image/Scarecrow.png" alt="mainImage">
+                </figure>
+            </section>
+
+            <section class="main__section">
+                <h1>I Have Bad News For You</h1>
+                <p class="section__paragraph">The Page You Are Looking For Might Be Removed Or Is Temporarily Unavailable</p>
+
+                <div class="section__bottom">
+                    <a [routerLink]="['/dashboard']">Back To Home Page</a>
+                </div>
+            </section>
+        </article>
+    </main>
+</div>
