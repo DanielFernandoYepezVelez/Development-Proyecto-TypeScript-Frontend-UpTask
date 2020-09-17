@@ -23,6 +23,7 @@
 }
 
 .header__figure {
+    cursor: pointer;
     position: relative;
 }
 
@@ -35,9 +36,14 @@
 .header__ul {
     top: 3em;
     right: -57px;
+    display: none;
     width: 5.5rem;
     list-style: none;
     position: absolute;
+}
+
+.header__figure:hover .header__ul {
+    display: block;
 }
 
 .header__list {

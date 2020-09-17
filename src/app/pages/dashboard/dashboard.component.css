@@ -1,7 +1,11 @@
-.article {
+.article__form {
     height: 84vh;
     display: grid;
     justify-items: center;
+}
+
+.article__form--hidden {
+    height: 80vh;
 }
 
 .section {
