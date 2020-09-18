@@ -25,6 +25,10 @@ body {
     background: linear-gradient(180deg, rgba(57, 200, 166, 1) 1%, rgba(52, 143, 190, 1) 37%, rgba(71, 130, 186) 71%, rgba(99, 107, 221, 1) 100%);
 }
 
+.body__menu--hidden {
+    min-width: max-content;
+}
+
 img {
     max-width: 100%;
 }

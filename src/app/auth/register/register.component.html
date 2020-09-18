@@ -6,37 +6,39 @@
         <p class="auth__paragraph">UpTask - Administrador De Proyectos</p>
     </header>
 
-    <main class="main__auth">
-        <h2 class="main__h2">Crear Cuenta</h2>
+    <main>
+        <article class="main__auth">
+            <h2 class="main__h2">Crear Cuenta</h2>
 
-        <form action="#" class="main__form">
-            <div class="campo">
-                <input type="text" id="name" (click)="inputName()">
-                <label for="#">Nombre</label>
+            <form action="#" class="main__form">
+                <div class="campo">
+                    <input type="text" id="name" (click)="inputName()">
+                    <label for="#">Nombre</label>
+                </div>
+
+                <div class="campo">
+                    <input type="text" id="email" (click)="inputEmail()">
+                    <label for="#">Correo</label>
+                </div>
+
+                <div class="campo">
+                    <input type="text" id="password" (click)="inputPassword()">
+                    <label for="#">Contraseña</label>
+                </div>
+
+                <button type="submit">Registrarse</button>
+            </form>
+
+            <div class="main__remember">
+                <p class="main__password"><a [routerLink]="['/login']">¿Ya Tienes Una Cuenta?</a></p>
             </div>
 
-            <div class="campo">
-                <input type="text" id="email" (click)="inputEmail()">
-                <label for="#">Correo</label>
+            <div class="main__auth2">
+                <p><i class="fab fa-twitter"></i> <a href="#">Visitanos En Twitter</a></p>
+                <p><i class="fab fa-instagram"></i> <a href="#">Visitanos En Instagram</a></p>
+                <p><i class="fab fa-youtube"></i> <a href="#">Visitanos En Youtube</a></p>
             </div>
-
-            <div class="campo">
-                <input type="text" id="password" (click)="inputPassword()">
-                <label for="#">Contraseña</label>
-            </div>
-
-            <button type="submit">Registrarse</button>
-        </form>
-
-        <div class="main__remember">
-            <p class="main__password"><a [routerLink]="['/login']">¿Ya Tienes Una Cuenta?</a></p>
-        </div>
-
-        <div class="main__auth2">
-            <p><i class="fab fa-twitter"></i> <a href="#">Visitanos En Twitter</a></p>
-            <p><i class="fab fa-instagram"></i> <a href="#">Visitanos En Instagram</a></p>
-            <p><i class="fab fa-youtube"></i> <a href="#">Visitanos En Youtube</a></p>
-        </div>
+        </article>
 
         <!--
         <p>No Tienes Ninguna Cuenta <a href="">Regístrate</a></p> -->

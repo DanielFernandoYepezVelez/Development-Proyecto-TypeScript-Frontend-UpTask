@@ -12,7 +12,7 @@
 }
 
 .aside {
-    height: 84vh;
+    height: 78.3vh;
     padding: 1rem;
     border: solid 2px var(--lightColor);
     border-top: none;
@@ -56,4 +56,13 @@
 
 .aside__list p:hover {
     color: black;
+}
+
+
+/* MEDIA QUERYS GENERALS */
+
+@media all and (min-width: 646px) {
+    .aside {
+        height: 81.5vh;
+    }
 }
