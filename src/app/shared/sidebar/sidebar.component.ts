@@ -32,9 +32,6 @@ export class SidebarComponent implements OnInit {
       /* Template Main Grid Modified */
       this.landingPage.className = 'main__dashboard';
 
-      /* New Height Form */
-      this.formProject.className = 'article__form';
-
       /* Project Complete New Width */
       this.projectComplete.classList.add('body__menu--hidden');
     } else {
@@ -44,9 +41,6 @@ export class SidebarComponent implements OnInit {
     
       /* Template Main Grid Modified */
       this.landingPage.className = 'main__dashboard--hidden';
-
-      /* New Geight Form */
-      this.formProject.classList.add('article__form--hidden');
 
       /* Project Complete New Width */
       this.projectComplete.classList.remove('body__menu--hidden');

@@ -1,6 +1,12 @@
+.article__auth--container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
 .auth__container {
     display: grid;
-    grid-row-gap: 1rem;
     align-items: center;
     padding: 0.5rem 1rem;
     justify-items: center;
@@ -10,7 +16,6 @@
 .auth__header {
     display: flex;
     align-items: center;
-    justify-self: start;
 }
 
 .auth__image {

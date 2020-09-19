@@ -14,6 +14,7 @@
 
 .header__figure--logo {
     display: flex;
+    cursor: pointer;
     line-height: 40px;
 }
 

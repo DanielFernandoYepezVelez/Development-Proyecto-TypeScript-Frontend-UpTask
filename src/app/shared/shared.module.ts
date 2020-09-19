@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 /* Components */
 import { HeaderComponent } from './header/header.component';
@@ -11,7 +12,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     FooterComponent,
     SidebarComponent,
   ],
-  imports: [],
+  imports: [
+    RouterModule
+  ],
   exports: [
     HeaderComponent,
     FooterComponent,

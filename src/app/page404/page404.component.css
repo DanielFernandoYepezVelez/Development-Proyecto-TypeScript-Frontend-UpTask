@@ -1,12 +1,13 @@
-.header {
-    padding: 1rem;
+.container__404 {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.main {
-    height: 600px;
-    display: flex;
-    align-content: center;
-    justify-content: center;
+.header {
+    padding: 1rem;
 }
 
 .main__article {

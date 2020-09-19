@@ -1,8 +1,7 @@
 .main__dashboard {
     display: grid;
-    grid-template-columns: 255px auto;
-    grid-template-rows: 84vh;
-    grid-template-rows: 78.3vh;
+    grid-template-rows: 100vh;
+    grid-template-columns: 300px auto;
     border: solid 1px var(--lightColor);
 }
 
@@ -10,13 +9,4 @@
     display: grid;
     grid-template-columns: auto;
     border: solid 1px var(--lightColor);
-}
-
-
-/* MEDIA QUERYS GENERALS */
-
-@media all and (min-width: 646px) {
-    .main__dashboard {
-        grid-template-rows: 81.5vh;
-    }
 }
