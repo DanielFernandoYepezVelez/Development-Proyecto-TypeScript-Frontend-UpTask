@@ -48,11 +48,13 @@
     flex-direction: column;
 }
 
-.main__form input[type="text"] {
+.main__form input[type="text"],
+input[type="email"],
+input[type="password"] {
     width: 100%;
     border: none;
     outline: none;
-    margin-bottom: 2rem;
+    margin-bottom: .3rem;
     padding-left: .5rem;
     background-color: inherit;
     border-bottom: 2px solid var(--lightColor);
@@ -61,6 +63,8 @@
 .campo {
     display: inherit;
     position: relative;
+    margin-bottom: 2rem;
+    flex-direction: column;
 }
 
 .main__form label {
@@ -72,9 +76,18 @@
 }
 
 .label__finally,
-.main__form input[type="text"]:focus+label {
+.main__form input[type="text"]:focus+label,
+input[type="email"]:focus+label,
+input[type="password"]:focus+label {
     top: -0.7rem;
     font-size: .5rem;
+}
+
+
+/* Interactive */
+
+.borderInput {
+    border-bottom: 2px solid var(--redColor) !important;
 }
 
 .main__form button[type="submit"] {

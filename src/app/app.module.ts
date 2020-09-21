@@ -18,10 +18,10 @@ import { Page404Component } from './page404/page404.component';
     Page404Component,
   ],
   imports: [
+    AuthModule,
+    PagesModule,
     BrowserModule,
     AppRoutingModule,
-    PagesModule,
-    AuthModule
   ],
   bootstrap: [ AppComponent ]
 })
