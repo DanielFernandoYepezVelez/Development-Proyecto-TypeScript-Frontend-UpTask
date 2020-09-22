@@ -39,28 +39,31 @@ export class RegisterComponent implements OnInit {
 
     switch (attribute) {
       case 'text':
-        if (value.length) {
-          this.labels[0].classList.add('label__finally');
-        } else {
-          this.labels[0].classList.remove('label__finally');
-        }
+        this.fieldValueTransitionLabel(value, 0, 'label__finally');
         break;
 
       case 'email':
-        if (value.length) {
-          this.labels[1].classList.add('label__finally');
-        } else {
-          this.labels[1].classList.remove('label__finally');
-        }
+        this.fieldValueTransitionLabel(value, 1, 'label__finally');
         break;
 
       case 'password':
-        if (value.length) {
-          this.labels[2].className = 'label__finally';
-        } else {
-          this.labels[2].classList.remove('label__finally');
-        }
+        this.fieldValueTransitionLabel(value, 2, 'label__finally');
         break;
+    }
+  }
+
+  /**
+   * Register Form Label Transition
+   */
+  public fieldValueTransitionLabel(
+    value: string,
+    index: number,
+    classCss: string
+  ): void {
+    if (value.length) {
+      this.labels[index].classList.add(classCss);
+    } else {
+      this.labels[index].classList.remove(classCss);
     }
   }
 
@@ -91,54 +94,67 @@ export class RegisterComponent implements OnInit {
 
     switch (attribute) {
       case 'text':
-        if (
-          this.formForma.get('name').status === 'VALID' &&
-          this.formForma.get('name').dirty &&
-          !this.formForma.get('name').invalid &&
-          this.formForma.get('name').valid
-        ) {
-          if (
-            this.labels[0].nextElementSibling ||
-            this.inputs[0].classList.contains('borderInput')
-          ) {
-            this.inputs[0].classList.remove('borderInput');
-            this.registerFormTemplateValidate(0);
-          }
-        } else if (
-          !this.formForma.get('name').valid &&
-          this.formForma.get('name').dirty
-        ) {
-          if (
-            !this.labels[0].nextElementSibling ||
-            !this.inputs[0].classList.contains('borderInput')
-          ) {
-            this.inputs[0].classList.add('borderInput');
-            this.registerFormTemplateValidate(0, 'Nombre Obligatorio');
-          }
-        }
+        this.validationTemplateLogicInput(
+          'name',
+          0,
+          'borderInput',
+          'Nombre No Válido'
+        );
         break;
 
       case 'email':
-        if (
-          this.formForma.get('email').status === 'VALID' &&
-          this.formForma.get('email').dirty &&
-          !this.formForma.get('email').invalid &&
-          this.formForma.get('email').valid
-        ) {
-          console.log('TODO FUNCIONA CORRECTAMENTE EMAIL');
-        }
+        this.validationTemplateLogicInput(
+          'email',
+          1,
+          'borderInput',
+          'Correo Eléctronico No Válido'
+        );
         break;
 
       case 'password':
-        if (
-          this.formForma.get('password').status === 'VALID' &&
-          this.formForma.get('password').dirty &&
-          !this.formForma.get('password').invalid &&
-          this.formForma.get('password').valid
-        ) {
-          console.log('TODO FUNCIONA CORRECTAMENTE PASSWORD');
-        }
+        this.validationTemplateLogicInput(
+          'password',
+          2,
+          'borderInput',
+          'Contraseña No Válida'
+        );
         break;
+    }
+  }
+
+  /**
+   * Register Form Validate Input Logic
+   */
+  public validationTemplateLogicInput(
+    fieldName: string,
+    index: number,
+    classCss: string,
+    message: string = ''
+  ): void {
+    if (
+      this.formForma.get(fieldName).status === 'VALID' &&
+      this.formForma.get(fieldName).dirty &&
+      !this.formForma.get(fieldName).invalid &&
+      this.formForma.get(fieldName).valid
+    ) {
+      if (
+        this.labels[index].nextElementSibling ||
+        this.inputs[index].classList.contains(classCss)
+      ) {
+        this.inputs[index].classList.remove(classCss);
+        this.registerFormTemplateValidate(index);
+      }
+    } else if (
+      !this.formForma.get(fieldName).valid &&
+      this.formForma.get(fieldName).dirty
+    ) {
+      if (
+        !this.labels[index].nextElementSibling ||
+        !this.inputs[index].classList.contains(classCss)
+      ) {
+        this.inputs[index].classList.add(classCss);
+        this.registerFormTemplateValidate(index, message);
+      }
     }
   }
 
@@ -189,7 +205,7 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   * Register Form Template Validate HTML
+   * Register Form Template Builder Validate HTML
    */
   public registerFormTemplateValidate(
     index: number,

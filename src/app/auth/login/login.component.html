@@ -10,30 +10,29 @@
         <main class="main__auth">
             <h2 class="main__h2">Inicia Sesión</h2>
 
-            <form action="#" class="main__form">
+            <form class="main__form" [formGroup]="formForma" (ngSubmit)="loginFormDataSaved()">
                 <div class="campo">
-                    <input type="email" id="email" (click)="inputEmail()">
-                    <label for="#">Correo</label>
+                    <input type="email" (blur)="input($event)" (input)="validateInput('email')" formControlName="email">
+                    <label>Correo Electrónico</label>
+                    <small *ngIf="validateOne">Correo Electrónico No Válido</small>
+                    <small *ngIf="validateTwo">Correo Electrónico Obligatorio</small>
                 </div>
 
                 <div class="campo">
-                    <input type="password" id="password" (click)="inputPassword()">
-                    <label for="#">Contraseña</label>
-                </div>
-
-                <div class="campo">
-                    <input type="password" id="password" (click)="inputPassword()">
-                    <label for="#">Repetir Contraseña</label>
+                    <input type="password" (blur)="input($event)" (input)="validateInput('password')" formControlName="password">
+                    <label>Contraseña</label>
+                    <small *ngIf="validateThree">Contraseña No Válida</small>
+                    <small *ngIf="validateFour">Contraseña Obligatoria</small>
                 </div>
 
                 <button type="submit">Iniciar Sesión</button>
             </form>
 
             <div class="main__remember">
-                <form action="#">
-                    <input type="checkbox" name="#" id="#"> <span> Recuérdame</span>
+                <form>
+                    <input type="checkbox"> <span> Recuérdame</span>
                 </form>
-                <p class="main__password"><a href="#">Olvidé Mi Contraseña</a></p>
+                <p class="main__password"><a>Olvidé Mi Contraseña</a></p>
             </div>
 
             <div class="main__auth2">
@@ -45,3 +44,12 @@
         </main>
     </section>
 </article>
+
+<hr>
+
+<pre>
+    campo: {{formForma.get('password').valid}}
+    Estado Del Formulario: {{formForma.valid}}
+    Estatus Del Formulario: {{formForma.status}}
+    Estatus Del Formulario: {{formForma.value | json }}
+</pre>

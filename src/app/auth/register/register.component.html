@@ -19,7 +19,7 @@
 
                     <div class="campo">
                         <input type="email" (blur)="input($event)" (input)="statusField($event)" formControlName="email">
-                        <label>Correo Eléctronico</label>
+                        <label>Correo Electrónico</label>
                     </div>
 
                     <div class="campo">
@@ -27,6 +27,11 @@
                         <label>Contraseña</label>
                     </div>
 
+                    <!-- <div class="campo">
+                        <input type="password" (blur)="input($event)" (input)="statusField($event)" formControlName="password">
+                        <label>Repetir Contraseña</label>
+                    </div>
+ -->
                     <button type="submit">Registrarse</button>
                 </form>
 
@@ -46,12 +51,3 @@
         </main>
     </section>
 </article>
-
-<hr>
-
-<pre>
-    campo: {{formForma.get('name').valid}}
-    Estado Del Formulario: {{formForma.valid}}
-    Estatus Del Formulario: {{formForma.status}}
-    Estatus Del Formulario: {{formForma.value | json }}
-</pre>
