@@ -7,49 +7,43 @@
             <p class="auth__paragraph">UpTask - Administrador De Proyectos</p>
         </header>
 
-        <main class="main__auth">
-            <h2 class="main__h2">Inicia Sesión</h2>
+        <main>
+            <article class="main__auth">
+                <h2 class="main__h2">Inicia Sesión</h2>
 
-            <form class="main__form" [formGroup]="formForma" (ngSubmit)="loginFormDataSaved()">
-                <div class="campo">
-                    <input type="email" (blur)="input($event)" (input)="validateInput('email')" formControlName="email">
-                    <label>Correo Electrónico</label>
-                    <small *ngIf="validateOne">Correo Electrónico No Válido</small>
-                    <small *ngIf="validateTwo">Correo Electrónico Obligatorio</small>
-                </div>
+                <form autocomplete="off" class="main__form" [formGroup]="formForma" (ngSubmit)="loginFormDataSaved()">
+                    <div class="campo">
+                        <input type="email" (change)="input($event)" (input)="validateInput('email')" formControlName="email">
+                        <label>Correo Electrónico</label>
+                        <small *ngIf="validateOne">Correo Electrónico No Válido</small>
+                        <small *ngIf="validateTwo">Correo Electrónico Obligatorio</small>
+                    </div>
 
-                <div class="campo">
-                    <input type="password" (blur)="input($event)" (input)="validateInput('password')" formControlName="password">
-                    <label>Contraseña</label>
-                    <small *ngIf="validateThree">Contraseña No Válida</small>
-                    <small *ngIf="validateFour">Contraseña Obligatoria</small>
-                </div>
+                    <div class="campo">
+                        <input type="password" (change)="input($event)" (input)="validateInput('password')" formControlName="password">
+                        <label>Contraseña</label>
+                        <small *ngIf="validateThree">Contraseña No Válida</small>
+                        <small *ngIf="validateFour">Contraseña Obligatoria</small>
+                    </div>
 
-                <button type="submit">Iniciar Sesión</button>
-            </form>
-
-            <div class="main__remember">
-                <form>
-                    <input type="checkbox"> <span> Recuérdame</span>
+                    <button type="submit">Iniciar Sesión</button>
                 </form>
-                <p class="main__password"><a>Olvidé Mi Contraseña</a></p>
-            </div>
 
-            <div class="main__auth2">
-                <p><i class="fab fa-google"></i><a href="#"> Inicia Sesión Con Google</a></p>
-                <p><i class="fab fa-twitter"></i><a href="#"> Inicia Sesión Con Twitter</a></p>
-            </div>
+                <div class="main__remember">
+                    <form [formGroup]="formForma">
+                        <input type="checkbox" formControlName="remember"> <span> Recuérdame</span>
+                    </form>
+                    <p class="main__password "><a>¿Olvidé Mi Contraseña?</a></p>
+                </div>
 
-            <p>No Tienes Ninguna Cuenta <a [routerLink]="['/register']">Regístrate</a></p>
+                <div class="main__auth2 ">
+                    <p id="googleBtn"><i class="fab fa-google "></i><a>Inicia Sesión Con Google</a></p>
+                    <p><i class="fab fa-facebook "></i><a>Inicia Sesión Con Facebook</a></p>
+                    <p><i class="fab fa-twitter "></i><a>Inicia Sesión Con Twitter</a></p>
+                </div>
+
+                <p class="register ">No Tienes Ninguna Cuenta <a [routerLink]="[ '/register'] ">Regístrate</a></p>
+            </article>
         </main>
     </section>
 </article>
-
-<hr>
-
-<pre>
-    campo: {{formForma.get('password').valid}}
-    Estado Del Formulario: {{formForma.valid}}
-    Estatus Del Formulario: {{formForma.status}}
-    Estatus Del Formulario: {{formForma.value | json }}
-</pre>

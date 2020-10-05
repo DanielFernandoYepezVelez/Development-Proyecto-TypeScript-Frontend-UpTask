@@ -18,20 +18,20 @@
                     </div>
 
                     <div class="campo">
-                        <input type="email" (blur)="input($event)" (input)="statusField($event)" formControlName="email">
+                        <input type="email" (change)="input($event)" (input)="statusField($event)" formControlName="email">
                         <label>Correo Electrónico</label>
                     </div>
 
                     <div class="campo">
-                        <input type="password" (blur)="input($event)" (input)="statusField($event)" formControlName="password">
+                        <input type="password" (change)="input($event)" (input)="statusField($event)" formControlName="password">
                         <label>Contraseña</label>
                     </div>
 
-                    <!-- <div class="campo">
-                        <input type="password" (blur)="input($event)" (input)="statusField($event)" formControlName="password">
+                    <div class="campo">
+                        <input type="password" (blur)="input($event)" (input)="statusField($event)" formControlName="repeat_password">
                         <label>Repetir Contraseña</label>
                     </div>
- -->
+
                     <button type="submit">Registrarse</button>
                 </form>
 
@@ -45,9 +45,14 @@
                     <p><i class="fab fa-youtube"></i> <a href="#">Visitanos En Youtube</a></p>
                 </div>
             </article>
-
-            <!--
-            <p>No Tienes Ninguna Cuenta <a href="">Regístrate</a></p> -->
         </main>
     </section>
 </article>
+
+<!-- <pre>
+    campo: {{formForma.get('password').valid}}
+    campo: {{formForma.get('repeat_password').valid}}
+    Estado Del Formulario: {{formForma.valid}}
+    Estatus Del Formulario: {{formForma.status}}
+    Estatus Del Formulario: {{formForma.value | json }}
+</pre> -->

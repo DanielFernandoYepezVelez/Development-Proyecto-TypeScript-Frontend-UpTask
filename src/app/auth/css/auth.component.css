@@ -1,6 +1,6 @@
 .article__auth--container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
     justify-content: center;
     align-items: center;
 }
@@ -28,7 +28,7 @@
 }
 
 .main__auth {
-    width: 288px;
+    width: 300px;
     min-height: 587px;
     border-radius: 40px;
     padding: 3rem 1.5rem 0;
@@ -110,6 +110,11 @@ input[type="password"]:focus+label {
     justify-content: space-between;
 }
 
+.main__remember a:hover {
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+
 .main__auth2 {
     margin-bottom: 3rem;
 }
@@ -124,6 +129,16 @@ input[type="password"]:focus+label {
 
 .main__auth2 p a {
     margin-left: .5rem;
+}
+
+.main__auth2 p a:hover {
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+
+.register a:hover {
+    cursor: pointer;
+    text-decoration-line: underline;
 }
 
 

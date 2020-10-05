@@ -1,5 +1,12 @@
+import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+/* Services */
+import { LoginService } from '../services/login.service';
+
+/* Constante De Google */
+declare const gapi: any;
 
 @Component({
   selector: 'app-login',
@@ -12,7 +19,7 @@ export class LoginComponent implements OnInit {
    */
   private inputs: HTMLCollectionBase;
   private labels: HTMLCollectionBase;
-
+  
   /**
    * Generals Logics Properties
    */
@@ -21,14 +28,31 @@ export class LoginComponent implements OnInit {
   public validateTwo: boolean = false;
   public validateFour: boolean = false;
   public validateThree: boolean = false;
+  
+  /**
+   * Variable De Google
+   */
+  private auth2: any;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService) {
     this.loginFormDataBuild();
   }
 
   ngOnInit(): void {
     Array.from((this.inputs = document.querySelectorAll('.main__form input')));
     Array.from((this.labels = document.querySelectorAll('.main__form label')));
+    this.emailPositionInitialRemember();
+    /* Inicia La Authenticación De Google */
+    this.startApp();
+  }
+  
+  /**
+   * Input Field Email Position Inital Remember
+   */
+  private emailPositionInitialRemember(): void {
+    if(this.formForma.get('email').value) {
+      this.fieldValueTransitionLabel(this.formForma.get('email').value, 0, 'label__finally');
+    }
   }
 
   /**
@@ -52,11 +76,7 @@ export class LoginComponent implements OnInit {
   /**
    * Login Form Transition Label
    */
-  public fieldValueTransitionLabel(
-    value: string,
-    index: number,
-    classCss: string
-  ): void {
+  private fieldValueTransitionLabel(value: string, index: number, classCss: string): void {
     if (value.length) {
       this.labels[index].classList.add(classCss);
     } else {
@@ -67,18 +87,11 @@ export class LoginComponent implements OnInit {
   /**
    * Login Form Data Build (ANGULAR)
    */
-  public loginFormDataBuild(): void {
+  private loginFormDataBuild(): void {
     this.formForma = this.formBuilder.group({
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            /^(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          ),
-        ],
-      ],
+      email: [localStorage.getItem('email') || '', [Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
       password: ['', [Validators.required, Validators.minLength(4)]],
+      remember: [false]
     });
   }
 
@@ -86,26 +99,47 @@ export class LoginComponent implements OnInit {
    * Login Form Get Data And Send To Server
    */
   public loginFormDataSaved(): void {
-    if (
-      this.formForma.status === 'INVALID' ||
-      this.formForma.touched === false ||
-      this.formForma.dirty === false ||
-      this.formForma.valid === false
-    ) {
+    // tslint:disable-next-line: max-line-length
+    if (this.formForma.status === 'INVALID' || this.formForma.dirty === false || this.formForma.valid === false) { 
       Object.values(this.formForma.controls).forEach((controlsField, index) => {
-        if (
-          controlsField.status === 'INVALID' ||
-          controlsField.valid === false
-        ) {
+
+        if (controlsField.status === 'INVALID' || controlsField.valid === false) {
           this.inputs[index].classList.add('borderInput');
           this.validateTwo = this.generalConditional('email');
           this.validateFour = this.generalConditional('password');
         }
+
       });
+
       return;
     }
 
-    console.log('Send Data To Server');
+    /* Response Backend */
+    this.loginService.login(this.formForma.value)
+      .subscribe(resp => this.savedRememberLocalStorage(),
+                 error => this.showAlertError(error.error.error));
+  }
+
+  /**
+   * Guardar Email En El LocalStorage Si El Usuario Lo Desea
+   */
+  private savedRememberLocalStorage(): void {
+    if(this.formForma.get('remember').value) {
+      localStorage.setItem('email', this.formForma.get('email').value);
+    } else {
+      localStorage.removeItem('email');
+    }
+  }
+
+  /**
+   * Mostrar Mensaje De Error Si Existe En La Respuesta Del Backend
+   */
+  private showAlertError(message: string): void {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: message,
+    });
   }
 
   /**
@@ -150,7 +184,7 @@ export class LoginComponent implements OnInit {
   /**
    * Big And General Conditional One (VALIDATION INPUT)
    */
-  public generalConditional(inputName: string): boolean {
+  private generalConditional(inputName: string): boolean {
     return (
       this.formForma.get(inputName).status === 'INVALID' &&
       !this.formForma.get(inputName).dirty &&
@@ -162,7 +196,7 @@ export class LoginComponent implements OnInit {
   /**
    * Big And General Conditional Second (VALIDATION INPUT)
    */
-  public generalConditionalSecond(inputName: string): boolean {
+  private generalConditionalSecond(inputName: string): boolean {
     return (
       this.formForma.get(inputName).status === 'INVALID' &&
       this.formForma.get(inputName).dirty &&
@@ -173,10 +207,37 @@ export class LoginComponent implements OnInit {
   /**
    * Big And General Conditional Third (VALIDATION INPUT)
    */
-  public generalConditionalThird(inputName: string): boolean {
+  private generalConditionalThird(inputName: string): boolean {
     return (
       this.formForma.get(inputName).status === 'VALID' &&
       this.formForma.get(inputName).valid
     );
+  }
+
+  /**
+   * Frontend Google Sign In Logic (Boton Personalizado)
+   * Los Array Function LOs Implemento Para Que No Cambien El This De Las Funciones
+   */
+  private startApp(): void {
+    gapi.load('auth2', () => {
+
+      this.auth2 = gapi.auth2.init({
+        client_id: '24949782543-ks08iocf3mi3tko0gn8ilpgspmb5rtcg.apps.googleusercontent.com',
+        cookiepolicy: 'single_host_origin',
+      });
+
+      this.attachSignin(document.getElementById('googleBtn'));
+    });
+  };
+
+  private attachSignin(element) {
+
+    this.auth2.attachClickHandler(element, {}, (googleUser) => {
+      const { id_token } = googleUser.getAuthResponse();
+      this.loginService.loginGoogle(id_token).subscribe();
+
+    }, (error) => {
+      alert(JSON.stringify(error, undefined, 2));
+    });
   }
 }
