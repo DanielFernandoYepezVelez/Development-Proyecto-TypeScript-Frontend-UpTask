@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /* Services */
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
    */
   public formForma: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) {
+  constructor(private formBuilder: FormBuilder, private registerService: RegisterService, private router: Router) {
     this.registerFormCreate();
   }
 
@@ -165,8 +166,9 @@ export class RegisterComponent implements OnInit {
 
     /* Response Backend */
     this.registerService.createUser(this.formForma.value)
-      .subscribe(resp => console.log(resp),
-                 error => this.showAlertError(error.error.error));
+      .subscribe(() => {
+        this.router.navigateByUrl('/login');
+      },error => this.showAlertError(error.error.error));
   }
 
   /**

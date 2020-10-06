@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -34,16 +35,16 @@ export class LoginComponent implements OnInit {
    */
   private auth2: any;
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService) {
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
     this.loginFormDataBuild();
+    /* Inicia La Authenticación De Google */
+    this.startApp();
   }
 
   ngOnInit(): void {
     Array.from((this.inputs = document.querySelectorAll('.main__form input')));
     Array.from((this.labels = document.querySelectorAll('.main__form label')));
     this.emailPositionInitialRemember();
-    /* Inicia La Authenticación De Google */
-    this.startApp();
   }
   
   /**
@@ -116,8 +117,10 @@ export class LoginComponent implements OnInit {
 
     /* Response Backend */
     this.loginService.login(this.formForma.value)
-      .subscribe(resp => this.savedRememberLocalStorage(),
-                 error => this.showAlertError(error.error.error));
+      .subscribe( () =>  {
+        this.savedRememberLocalStorage();
+        this.router.navigateByUrl('/dashboard');
+        }, error => this.showAlertError(error.error.error));
   }
 
   /**
@@ -135,11 +138,7 @@ export class LoginComponent implements OnInit {
    * Mostrar Mensaje De Error Si Existe En La Respuesta Del Backend
    */
   private showAlertError(message: string): void {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: message,
-    });
+    Swal.fire({ icon: 'error', title: 'Oops...', text: message });
   }
 
   /**
@@ -234,7 +233,10 @@ export class LoginComponent implements OnInit {
 
     this.auth2.attachClickHandler(element, {}, (googleUser) => {
       const { id_token } = googleUser.getAuthResponse();
-      this.loginService.loginGoogle(id_token).subscribe();
+
+      this.loginService.loginGoogle(id_token).subscribe(
+        () => this.router.navigateByUrl('/dashboard')
+      );
 
     }, (error) => {
       alert(JSON.stringify(error, undefined, 2));
