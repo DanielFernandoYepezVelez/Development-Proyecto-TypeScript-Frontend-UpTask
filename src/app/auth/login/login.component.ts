@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /* Services */
@@ -16,11 +16,16 @@ declare const gapi: any;
 })
 export class LoginComponent implements OnInit {
   /**
+   * Variable De Google
+   */
+  private auth2: any;
+
+  /**
    * Document Object Model
    */
   private inputs: HTMLCollectionBase;
   private labels: HTMLCollectionBase;
-  
+
   /**
    * Generals Logics Properties
    */
@@ -29,24 +34,19 @@ export class LoginComponent implements OnInit {
   public validateTwo: boolean = false;
   public validateFour: boolean = false;
   public validateThree: boolean = false;
-  
-  /**
-   * Variable De Google
-   */
-  private auth2: any;
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router, private ngZone: NgZone) {
     this.loginFormDataBuild();
-    /* Inicia La Authenticación De Google */
-    this.startApp();
   }
-
+  
   ngOnInit(): void {
     Array.from((this.inputs = document.querySelectorAll('.main__form input')));
     Array.from((this.labels = document.querySelectorAll('.main__form label')));
     this.emailPositionInitialRemember();
+    /* Prepara El Boton Con Su Id Para Iniciar La Authenticación De Google(IMPORTANTE!!) */
+    this.startApp();
   }
-  
+
   /**
    * Input Field Email Position Inital Remember
    */
@@ -100,7 +100,6 @@ export class LoginComponent implements OnInit {
    * Login Form Get Data And Send To Server
    */
   public loginFormDataSaved(): void {
-    // tslint:disable-next-line: max-line-length
     if (this.formForma.status === 'INVALID' || this.formForma.dirty === false || this.formForma.valid === false) { 
       Object.values(this.formForma.controls).forEach((controlsField, index) => {
 
@@ -215,7 +214,7 @@ export class LoginComponent implements OnInit {
 
   /**
    * Frontend Google Sign In Logic (Boton Personalizado)
-   * Los Array Function LOs Implemento Para Que No Cambien El This De Las Funciones
+   * Las Arrow Functions Las Implemento Para Que No Cambien El This(Contexto) De Las Funciones
    */
   private startApp(): void {
     gapi.load('auth2', () => {
@@ -235,8 +234,11 @@ export class LoginComponent implements OnInit {
       const { id_token } = googleUser.getAuthResponse();
 
       this.loginService.loginGoogle(id_token).subscribe(
-        () => this.router.navigateByUrl('/dashboard')
-      );
+        () => {
+          this.ngZone.run(() => {
+            this.router.navigateByUrl('/dashboard');
+          });
+        });
 
     }, (error) => {
       alert(JSON.stringify(error, undefined, 2));

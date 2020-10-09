@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 /* Services */
 import { LoginService } from '../../auth/services/login.service';
@@ -10,10 +9,9 @@ import { LoginService } from '../../auth/services/login.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService) { }
 
   public logout(): void {
     this.loginService.logout();
-    this.router.navigateByUrl('/login');
   }
 }

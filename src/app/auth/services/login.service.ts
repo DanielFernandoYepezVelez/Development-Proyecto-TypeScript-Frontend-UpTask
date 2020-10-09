@@ -1,21 +1,26 @@
-import { catchError, map, tap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 
 /* Interfaces */
 import { ILogin } from '../interfaces/login.interface';
 
 /* Variables De Entorno */
 import { environment } from '../../../environments/environment';
-import { Observable, of } from 'rxjs';
+
+/* Variables Google */
+declare const gapi: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+  private auth2: any;
   private url: string = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone) { }
 
   /**
    * User Login Normal
@@ -56,9 +61,16 @@ export class LoginService {
   }
 
   /**
-   * Delete Token LocalStorage, Then Logout
+   * Logout De Google - Delete Token LocalStorage
    */
   public logout(): void {
-    localStorage.removeItem('token');
+    this.auth2 = gapi.auth2.getAuthInstance();
+
+    this.auth2.signOut().then(() => {
+      this.ngZone.run(() => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
+      });
+    });
   }
 }
