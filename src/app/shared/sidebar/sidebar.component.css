@@ -15,6 +15,7 @@
     width: 290px;
     padding: 1rem;
     height: 100vh;
+    /* height: 170vh; */
     border-left: solid 2px var(--lightColor);
     border-right: solid 2px var(--lightColor);
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.46);
@@ -50,11 +51,23 @@
 }
 
 .aside__list p {
-    cursor: pointer;
     margin-bottom: 0.5rem;
+}
+
+.aside__list p li a {
+    cursor: pointer;
     transition: all 1s ease;
 }
 
-.aside__list p:hover {
+.aside__list p li a:hover {
     color: black;
+}
+
+
+/* MEDIA QUERYS */
+
+@media all and (max-width: 473px) {
+    .aside {
+        height: 170vh;
+    }
 }

@@ -3,8 +3,10 @@
         <h2>Nuevo Proyecto</h2>
 
         <div class="section__project">
-            <form action="#" class="section__form">
-                <input type="text">
+            <form autocomplete="off" class="section__form main__form" [formGroup]="formForma" (ngSubmit)="projectFormDataSaved()">
+                <input type="text" formControlName="name">
+                <small *ngIf="conditionalNameHTML">Minimo 6 Caracteres</small>
+                <small *ngIf="requiredNameHTML">Nombre Projecto Obligatorio</small>
                 <input type="submit" value="Crear Proyecto">
             </form>
         </div>

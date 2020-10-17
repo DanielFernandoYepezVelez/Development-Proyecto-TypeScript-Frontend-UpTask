@@ -10,6 +10,9 @@ import { ILogin } from '../interfaces/login.interface';
 /* Variables De Entorno */
 import { environment } from '../../../environments/environment';
 
+/* Project Model(For All Project) */
+import { Project } from '../../pages/models/project.model';
+
 /* Variables Google */
 declare const gapi: any;
 
@@ -18,6 +21,7 @@ declare const gapi: any;
 })
 export class LoginService {
   private auth2: any;
+  public projects: Project;
   private url: string = environment.baseUrl;
 
   constructor(private http: HttpClient, private router: Router, private ngZone: NgZone) { }
@@ -47,6 +51,7 @@ export class LoginService {
 
   /**
    * Validate Token LocalStorage And Renew
+   * LOGICA PARA UN SERVICIO SINGLETON Y EL NOMBRE DE LOS PROYECTOS
    */
   public loginRenew(): Observable<boolean> {
     const token: string = localStorage.getItem('token') || '';
@@ -54,7 +59,20 @@ export class LoginService {
     return this.http.get(`${this.url}/login/renew`, {
       headers: { Authorization: `Bearer ${token}`}})
               .pipe(
-                tap((resp: any) => localStorage.setItem('token', resp.tokenValidado)),
+                tap((resp: any) => {
+                  const idProjects: number[] = [];
+                  const projectNames: string[] = [];
+
+                  localStorage.setItem('token', resp.tokenValidado);
+                  resp.projects.forEach( project => {
+                    const { name, id } = project;
+
+                    idProjects.push(id);
+                    projectNames.push(name);
+                  });
+
+                  this.projects = new Project(projectNames, idProjects);
+                }),
                 map(() => true),
                 catchError(() => of(false))
               );

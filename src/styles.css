@@ -9,7 +9,6 @@
 
 html {
     box-sizing: border-box;
-    /* height: 100%; */
 }
 
 *,
@@ -21,17 +20,10 @@ html {
 }
 
 body {
-    /* min-height: 100vh; */
     background: rgb(57, 200, 166);
     font-family: var(--primaryLetter), var(--secundaryLetter), sans-serif;
     background: linear-gradient(180deg, rgba(57, 200, 166, 1) 1%, rgba(52, 143, 190, 1) 37%, rgba(71, 130, 186) 71%, rgba(99, 107, 221, 1) 100%);
 }
-
-
-/* 
-.all_project {
-    min-height: 100%;
-} */
 
 .body__menu--hidden {
     min-width: max-content;
@@ -56,4 +48,19 @@ button {
 
 a {
     text-decoration: none;
+}
+
+
+/* MEDIA QUERYS GENERALES */
+
+@media all and (max-width: 333px) {
+    body {
+        min-height: 102vh;
+    }
+}
+
+@media all and (max-width: 473px) {
+    .body__menu--hidden {
+        min-height: 169.8vh;
+    }
 }

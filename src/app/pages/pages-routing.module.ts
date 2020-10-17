@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'dashboard', component: LandingPageComponent, canActivate:[ AuthGuard ],
   children: [
       { path: '', component: DashboardComponent },
-      { path: 'tasks', component: TasksComponent },
+      { path: 'tasks/:indice', component: TasksComponent },
       { path: 'projects', component: ProjectsComponent },
     ]
   },

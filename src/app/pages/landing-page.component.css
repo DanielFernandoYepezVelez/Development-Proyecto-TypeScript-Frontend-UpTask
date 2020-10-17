@@ -1,6 +1,7 @@
 .main__dashboard {
     display: grid;
     grid-template-rows: 100vh;
+    /* grid-template-rows: 169.8vh; */
     grid-template-columns: 300px auto;
     border: solid 1px var(--lightColor);
 }
@@ -9,4 +10,13 @@
     display: grid;
     grid-template-columns: auto;
     border: solid 1px var(--lightColor);
+}
+
+
+/* MEDIA QUERYS */
+
+@media all and (max-width: 473px) {
+    .main__dashboard {
+        grid-template-rows: 169.8vh;
+    }
 }

@@ -1,7 +1,9 @@
 .article__form {
     display: grid;
     height: 100vh;
+    grid-row-gap: 1rem;
     justify-items: center;
+    grid-template-rows: 200px;
 }
 
 .section {
@@ -43,6 +45,10 @@ input[type="submit"] {
     cursor: pointer;
     border-radius: 20px;
     background-color: black;
+}
+
+.main__form small {
+    color: var(--redColor);
 }
 
 

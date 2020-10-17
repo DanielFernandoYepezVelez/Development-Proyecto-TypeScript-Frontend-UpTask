@@ -8,19 +8,9 @@
             <h1>Proyectos</h1>
 
             <section class="aside__list">
-                <p>
+                <p *ngFor="let name of projects; let i = index ">
                     <li>
-                        <a href=""></a>Primer Proyecto App Web</li>
-                </p>
-
-                <p>
-                    <li>
-                        <a href=""></a>Segundo Proyecto App Web</li>
-                </p>
-
-                <p>
-                    <li>
-                        <a href=""></a>Diseño De Logotipo Web APP</li>
+                        <a (click)="showProject(i)">{{ name }}</a></li>
                 </p>
             </section>
         </section>
