@@ -18,6 +18,9 @@ export class ProjectsComponent {
   public formForma: FormGroup;
   private formNameProjectSubmitted = false;
 
+  /*
+   * Coditionals DOM
+   */
   public get conditionalNameHTML(): boolean { 
     return this.formForma.get('name').invalid && this.formForma.get('name').dirty;
   }

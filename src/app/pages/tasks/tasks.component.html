@@ -1,27 +1,30 @@
 <article class="article__form" id="article__form">
     <section class="section">
-        <h2> Tareas - {{ titleProject[this.activatedRoute.snapshot.paramMap.get('indice')] }} </h2>
+        <h2> Tareas - {{ titleProject[paramsURL] }} </h2>
 
         <div class="section__project">
-            <form autocomplete="off" class="section__form main__form">
-                <input type="text">
-                <!-- formControlName="name" -->
-                <!-- [formGroup]="formForma" (ngSubmit)="projectFormDataSaved()" -->
-                <!-- <small *ngIf="conditionalNameHTML">Minimo 6 Caracteres</small>
-                <small *ngIf="requiredNameHTML">Nombre Projecto Obligatorio</small> -->
+            <form autocomplete="off" class="section__form main__form" [formGroup]="formForma" (ngSubmit)="taskFormDataSaved()">
+                <input type="text" formControlName="name">
+                <small *ngIf="conditionalNameHTML">Minimo 6 Caracteres</small>
+                <small *ngIf="requiredNameHTML">Nombre Tarea Obligatoria</small>
                 <input type="submit" value="Crear Tarea">
             </form>
-
-            <!-- <li *ngFor="let name of taskService.task.taskNames">
-                <a>{{ name }}</a>
-            </li> -->
         </div>
     </section>
 
     <section class="section__project section__task">
-        <div class="section__form" *ngFor="let nameTask of taskService.task.taskNames">
-            <p> {{ nameTask }} <span><i class="fas fa-trash-alt"></i> <i class="far fa-check-circle"></i></span>
-            </p>
+        <div class="section__form" *ngFor="let nameTask of taskNames">
+            <p> {{ nameTask }} <span> <i class="far fa-check-circle"></i> <i class="fas fa-trash-alt"></i> </span> </p>
+        </div>
+    </section>
+
+    <section class="section__project section__buttons">
+        <div>
+            <a><i class="far fa-edit"></i> Actualizar Proyecto</a>
+        </div>
+
+        <div>
+            <a><i class="fas fa-trash-alt"></i> Eliminar Proyecto</a>
         </div>
     </section>
 </article>

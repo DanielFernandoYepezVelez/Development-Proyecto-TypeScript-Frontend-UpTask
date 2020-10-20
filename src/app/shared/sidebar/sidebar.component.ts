@@ -56,7 +56,9 @@ export class SidebarComponent implements OnInit {
   }
 
   public showProject(indice: number) {
+    const idProject = this.idProjects[indice];
+
     this.taskService.tasks(this.idProjects[indice]).subscribe(
-       () => this.router.navigateByUrl(`/dashboard/tasks/${indice}`));
+       () => this.router.navigateByUrl(`/dashboard/tasks/${indice}/${idProject}`));
   }
 }

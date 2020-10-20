@@ -3,6 +3,9 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+/* Interfaces */
+import { ITask } from '../../models/ITask';
+
 /* Model For All Project UPTASK */
 import { Task } from '../models/task.model';
 
@@ -49,5 +52,25 @@ export class TaskService {
                 }),
                 catchError(() => of(false)),
               );
+  }
+
+  /**
+   * Task Create
+   */
+  public createTask(name: ITask, projectId: string): Observable<object> {
+    return this.http.post(`${this.url}/task/${projectId}`, { name }, {
+               headers: { Authorization: this.token }})
+                      .pipe(
+                        tap((res: any) => {
+                          this.task.taskNames.length = 0;
+                          const arrayTaskNames: string[] = [];
+
+                          res.tasks.forEach(task => {
+                            arrayTaskNames.push(task.task);
+                          });
+
+                          this.task.taskNames = arrayTaskNames;
+                        })
+                      );
   }
 }
