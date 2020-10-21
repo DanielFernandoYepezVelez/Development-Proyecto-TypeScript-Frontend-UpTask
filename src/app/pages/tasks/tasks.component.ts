@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms'
-
-/* Model For All Project UPTASK */
-import { Task } from '../models/task.model';
+import Swal from 'sweetalert2';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 /* Services */
 import { LoginService } from '../../auth/services/login.service';
+import { ProjectService } from '../services/project.service';
 import { TaskService } from '../services/task.service';
 
 @Component({
@@ -14,24 +13,33 @@ import { TaskService } from '../services/task.service';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css', '../css/pages.component.css']
 })
-export class TasksComponent implements OnInit {
-  get titleProject(): string[] {
-    return this.loginService.projects.projectNames;
-  }
-
-  get paramsURL(): string {
-    return this.activatedRoute.snapshot.paramMap.get('indice');
-  }
-
-  get taskNames(): string[] {
-    return this.taskService.task.taskNames;
-  }
-
+export class TasksComponent {
   /*
    * Task Form Variables
    */
   public formForma: FormGroup;
   private formNameTaskSubmitted = false;
+
+  get titleProject(): string[] {
+    return this.loginService.projects.projectNames;
+  }
+
+  get indexProject(): number {
+    // tslint:disable-next-line: radix
+    return parseInt(this.activatedRoute.snapshot.paramMap.get('indice'));
+  }
+
+    get projectUrl(): string {
+    return this.loginService.projects.projectUrls[this.indexProject];
+  }
+
+  get projectId(): number {
+    return this.loginService.projects.projectIds[this.indexProject];
+  }
+
+  get taskNames(): string[] {
+    return this.taskService.task?.taskNames;
+  }
 
   /*
    * Coditionals DOM
@@ -44,14 +52,11 @@ export class TasksComponent implements OnInit {
     return this.formNameTaskSubmitted && !this.formForma.get('name').dirty && !this.formForma.valid;
   }
 
-  constructor(public activatedRoute: ActivatedRoute,
-              private loginService: LoginService,
-              public taskService: TaskService,
-              private formBuilder: FormBuilder) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,
+              private projectService: ProjectService, private loginService: LoginService,
+              private taskService: TaskService, private formBuilder: FormBuilder) {
               this.taskFormDataBuild();
               }
-
-  ngOnInit(): void { }
 
   /**
    * Task Form Build
@@ -72,8 +77,68 @@ export class TasksComponent implements OnInit {
     }
 
     /* Send Data For Backend, If Is Right! */
-    const projectId = this.activatedRoute.snapshot.paramMap.get('projectId')
-    this.taskService.createTask(this.formForma.value.name, projectId).subscribe();
+    this.taskService.createTask(this.formForma.value.name, this.projectId)
+        .subscribe();
+
     this.formForma.reset();
+  }
+
+  /**
+   * State Update Task Backend
+   */
+  public updateTask() {
+    console.log("Actualizando El Estado De La Tarea");
+  }
+
+  /**
+   * Delete Task For Backend
+   */
+  public deleteTask(index: number) {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: 'Las Tareas Eliminadas No Se Pueden Recuperar!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar Definitivamente!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.taskService.deleteTask(this.taskService.task.taskIds[index], index)
+            .subscribe();
+
+        Swal.fire(
+          'Eliminado!',
+          'Tu Archivo Fue Eliminado.',
+          'success'
+        )}
+    });
+  }
+
+  /**
+   * Delete Task For Backend
+   */
+  public deleteProject() {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: 'Los Proyectos Eliminadas No Se Pueden Recuperar!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar Definitivamente!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.projectService.deleteProject(this.projectId, this.projectUrl, this.indexProject)
+            .subscribe(() => this.router.navigateByUrl('/dashboard'));
+
+        Swal.fire(
+          'Eliminado!',
+          'Tu Archivo Fue Eliminado.',
+          'success'
+        )}
+      });
   }
 }

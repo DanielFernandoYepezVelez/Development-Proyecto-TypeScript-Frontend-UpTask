@@ -11,16 +11,15 @@ import { LoginService } from '../../auth/services/login.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  public projects: string[];
-  public idProjects: number[];
   private landingPage: HTMLElement;
   private asideContainer: HTMLElement;
   private projectComplete: HTMLBodyElement;
 
-  constructor(private loginService: LoginService, private taskService: TaskService, private router: Router) {
-    this.idProjects = loginService.projects.projectsId;
-    this.projects = this.loginService.projects.projectNames;
+  get projectNames(): string[] {
+    return this.loginService.projects.projectNames;
   }
+
+  constructor(private loginService: LoginService, private taskService: TaskService, private router: Router) { }
 
   public ngOnInit(): void {
     this.asideContainer = document.querySelector('#aside');
@@ -56,9 +55,10 @@ export class SidebarComponent implements OnInit {
   }
 
   public showProject(indice: number) {
-    const idProject = this.idProjects[indice];
+    const projectId = this.loginService.projects.projectIds[indice];
+    const projectUrl = this.loginService.projects.projectUrls[indice];
 
-    this.taskService.tasks(this.idProjects[indice]).subscribe(
-       () => this.router.navigateByUrl(`/dashboard/tasks/${indice}/${idProject}`));
+    this.taskService.tasks(projectId).subscribe(
+       () => this.router.navigateByUrl(`/dashboard/tasks/${indice}/${projectUrl}/${projectId}`));
   }
 }

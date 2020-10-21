@@ -8,7 +8,7 @@
             <h1>Proyectos</h1>
 
             <section class="aside__list">
-                <p *ngFor="let name of projects; let i = index ">
+                <p *ngFor="let name of projectNames; let i = index ">
                     <li>
                         <a (click)="showProject(i)">{{ name }}</a></li>
                 </p>

@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -56,21 +56,48 @@ export class TaskService {
 
   /**
    * Task Create
+   * LOGICA PARA UN SERVICIO SINGLETON Y CREAR LAS TAREAS PARA TODO EL PROYECTO
    */
-  public createTask(name: ITask, projectId: string): Observable<object> {
+  public createTask(name: ITask, projectId: number): Observable<object> {
     return this.http.post(`${this.url}/task/${projectId}`, { name }, {
                headers: { Authorization: this.token }})
                       .pipe(
                         tap((res: any) => {
+                          this.task.taskIds.length = 0;
                           this.task.taskNames.length = 0;
+                          this.task.taskStates.length = 0;
+
+                          const arrayTaskIds: number[] = [];
                           const arrayTaskNames: string[] = [];
+                          const arrayTaskStates: number[] = [];
 
                           res.tasks.forEach(task => {
+                            arrayTaskIds.push(task.id);
                             arrayTaskNames.push(task.task);
+                            arrayTaskStates.push(task.state);
                           });
 
+                          this.task.taskIds = arrayTaskIds;
                           this.task.taskNames = arrayTaskNames;
-                        })
+                          this.task.taskStates = arrayTaskStates;
+                        }),
+                        catchError(() => of(false)),
                       );
+  }
+
+  /**
+   * Task Delete
+   * LOGICA PARA UN SERVICIO SINGLETON Y ELIMINAR LAS TAREAS PARA TODO EL PROYECTO
+   */
+  public deleteTask(taskId: number, indice: number): Observable<object> {
+    return this.http.delete(`${this.url}/task/${taskId}`, {
+       headers: { Authorization: this.token }})
+                  .pipe(
+                    tap(() => {
+                        this.task.taskIds.splice(indice, 1);
+                        this.task.taskNames.splice(indice, 1);
+                        this.task.taskStates.splice(indice, 1);
+                    }),
+                  );
   }
 }

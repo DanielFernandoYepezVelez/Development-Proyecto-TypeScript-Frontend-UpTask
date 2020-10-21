@@ -1,6 +1,6 @@
 <article class="article__form" id="article__form">
     <section class="section">
-        <h2> Tareas - {{ titleProject[paramsURL] }} </h2>
+        <h2> Tareas - {{ titleProject[indexProject] }} </h2>
 
         <div class="section__project">
             <form autocomplete="off" class="section__form main__form" [formGroup]="formForma" (ngSubmit)="taskFormDataSaved()">
@@ -13,8 +13,8 @@
     </section>
 
     <section class="section__project section__task">
-        <div class="section__form" *ngFor="let nameTask of taskNames">
-            <p> {{ nameTask }} <span> <i class="far fa-check-circle"></i> <i class="fas fa-trash-alt"></i> </span> </p>
+        <div class="section__form" *ngFor="let nameTask of taskNames; let i = index">
+            <p> {{ nameTask }} <span> <i (click)="updateTask()" class="far fa-check-circle"></i> <i (click)="deleteTask(i)" class="fas fa-trash-alt"></i> </span> </p>
         </div>
     </section>
 
@@ -24,7 +24,7 @@
         </div>
 
         <div>
-            <a><i class="fas fa-trash-alt"></i> Eliminar Proyecto</a>
+            <a (click)="deleteProject()"><i class="fas fa-trash-alt"></i> Eliminar Proyecto</a>
         </div>
     </section>
 </article>

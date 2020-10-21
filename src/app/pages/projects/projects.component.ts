@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /* Services */
 import { ProjectService } from '../services/project.service';
-import { LoginService } from '../../auth/services/login.service';
 
 @Component({
   selector: 'app-projects',
@@ -31,7 +30,6 @@ export class ProjectsComponent {
 
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectService,
-              private loginService: LoginService,
               private router: Router) {
     this.projectFormDataBuild();
   }
@@ -58,7 +56,6 @@ export class ProjectsComponent {
     this.projectService.createProject(this.formForma.value.name)
         .subscribe(() => {
           this.router.navigateByUrl('/dashboard');
-          this.loginService.projects.projectNames.push(this.formForma.value.name);
         }, error => console.log(error));
   }
 }

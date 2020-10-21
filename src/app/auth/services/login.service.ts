@@ -60,18 +60,20 @@ export class LoginService {
       headers: { Authorization: `Bearer ${token}`}})
               .pipe(
                 tap((resp: any) => {
-                  const idProjects: number[] = [];
+                  const projectIds: number[] = [];
+                  const projectUrls: string[] = [];
                   const projectNames: string[] = [];
 
                   localStorage.setItem('token', resp.tokenValidado);
                   resp.projects.forEach( project => {
-                    const { name, id } = project;
+                    const { id, url, name } = project;
 
-                    idProjects.push(id);
+                    projectIds.push(id);
+                    projectUrls.push(url);
                     projectNames.push(name);
                   });
 
-                  this.projects = new Project(projectNames, idProjects);
+                  this.projects = new Project(projectIds, projectUrls, projectNames);
                 }),
                 map(() => true),
                 catchError(() => of(false))

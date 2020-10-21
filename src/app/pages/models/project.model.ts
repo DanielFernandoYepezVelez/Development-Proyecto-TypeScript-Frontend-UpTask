@@ -11,5 +11,5 @@ A puntar A La Misma Referencia De Memoria, Donde
 Tenga Solicitado El Servicio Donde Se Instancio Este Modelo.
 */
 export class Project {
-  constructor(public projectNames: string[], public projectsId: number[]) { }
+  constructor(public projectIds: number[], public projectUrls: string[], public projectNames: string[]) { }
 }
