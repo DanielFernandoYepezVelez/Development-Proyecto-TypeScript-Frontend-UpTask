@@ -12,6 +12,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { LandingPageComponent } from './landing-page.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProjectUpdateComponent } from './components/project-update/project-update.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LandingPageComponent,
     ProjectsComponent,
     DashboardComponent,
+    ProjectUpdateComponent,
   ],
   imports: [
     CommonModule,

@@ -93,7 +93,7 @@ export class TasksComponent {
   /**
    * Delete Task For Backend
    */
-  public deleteTask(index: number) {
+  public deleteTask(index: number): void {
     Swal.fire({
       title: 'Estas Seguro?',
       text: 'Las Tareas Eliminadas No Se Pueden Recuperar!',
@@ -117,9 +117,16 @@ export class TasksComponent {
   }
 
   /**
+   * Update Project For Backend
+   */
+  public updateProject(): void {
+    this.router.navigateByUrl(`/dashboard/project/${this.indexProject}/${this.projectUrl}/${this.projectId}`);
+  }
+
+  /**
    * Delete Task For Backend
    */
-  public deleteProject() {
+  public deleteProject(): void {
     Swal.fire({
       title: 'Estas Seguro?',
       text: 'Los Proyectos Eliminadas No Se Pueden Recuperar!',
@@ -138,7 +145,7 @@ export class TasksComponent {
           'Eliminado!',
           'Tu Archivo Fue Eliminado.',
           'success'
-        )}
-      });
+        );
+      }});
   }
 }

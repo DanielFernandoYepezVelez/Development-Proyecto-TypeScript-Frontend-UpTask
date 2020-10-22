@@ -9,13 +9,15 @@ import { TasksComponent } from './tasks/tasks.component';
 import { LandingPageComponent } from './landing-page.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProjectUpdateComponent } from './components/project-update/project-update.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: LandingPageComponent, canActivate:[ AuthGuard ],
   children: [
       { path: '', component: DashboardComponent },
-      { path: 'tasks/:indice/:projectUrl/:projectId', component: TasksComponent },
       { path: 'projects', component: ProjectsComponent },
+      { path: 'tasks/:indice/:projectUrl/:projectId', component: TasksComponent },
+      { path: 'project/:indice/:projectUrl/:projectId', component: ProjectUpdateComponent },
     ]
   },
 ];

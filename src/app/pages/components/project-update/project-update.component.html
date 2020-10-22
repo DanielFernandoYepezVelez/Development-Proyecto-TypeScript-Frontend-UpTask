@@ -1,0 +1,14 @@
+<article class="article__form" id="article__form">
+    <section class="section">
+        <h2>Actualizar - {{ titleProject }}</h2>
+
+        <div class="section__project">
+            <form autocomplete="off" class="section__form main__form" [formGroup]="formForma" (ngSubmit)="projectUpdateFormDataSaved()">
+                <input type="text" formControlName="name">
+                <small *ngIf="conditionalNameHTML">Minimo 6 Caracteres</small>
+                <small *ngIf="requiredNameHTML">Nombre Projecto Obligatorio</small>
+                <input type="submit" value="Actualizar Proyecto">
+            </form>
+        </div>
+    </section>
+</article>

@@ -1,6 +1,6 @@
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 /* Interfaces */
@@ -41,20 +41,40 @@ export class ProjectService {
                       this.loginService.projects.projectNames.push(name);
                     });
                   }),
-                  catchError(() => of(false))
+                catchError(() => of(false))
               );
   }
 
-  public deleteProject(projectId: number, projectUrl: string, indice: number) {
+  /**
+   * Project Update
+   */
+  public updateProject(name: string, projectUrl: string, projectId: number, indice: number) {
+    return this.http.put(`${this.url}/project/${projectUrl}/${projectId}`, { name }, {
+                headers: { Authorization: this.token }})
+                 .pipe(
+                   tap((res: any) => {
+                     /* El Backend Debe Devolverme El Proyecto Actualizado */
+                     this.loginService.projects.projectNames[indice] = name;
+                     console.log(res);
+                     console.log(indice);
+                   }),
+                  catchError(() => of(false))
+                );
+  }
+
+  /**
+   * Project Delete
+   */
+  public deleteProject(projectId: number, projectUrl: string, indice: number): Observable<any> {
     return this.http.delete(`${this.url}/project/${projectUrl}/${projectId}`, {
                 headers: { Authorization: this.token}})
                       .pipe(
-                        tap((resp: any) => {
+                        tap(() => {
                           this.loginService.projects.projectIds.splice(indice, 1);
                           this.loginService.projects.projectUrls.splice(indice, 1);
                           this.loginService.projects.projectNames.splice(indice, 1);
                         }),
-
+                      catchError(() => of(false))
                       );
   }
 }

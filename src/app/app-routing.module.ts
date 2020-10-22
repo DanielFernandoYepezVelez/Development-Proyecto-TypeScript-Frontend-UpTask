@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes } from '@angular/router';
 
 /* Routing Modules(childs) */
 import { PagesRoutingModule } from './pages/pages-routing.module';
@@ -8,7 +8,7 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 /* Components */
 import { Page404Component } from './page404/page404.component';
 
-const routes: Routes = [  
+const routes: Routes = [
   /* path: '/dashboard' PagesRouting */
   /* path: '/auth' AuthRouting */
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
