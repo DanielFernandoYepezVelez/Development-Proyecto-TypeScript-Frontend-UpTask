@@ -86,8 +86,9 @@ export class TasksComponent {
   /**
    * State Update Task Backend
    */
-  public updateTask() {
-    console.log("Actualizando El Estado De La Tarea");
+  public updateTask(index: number) {
+    this.taskService.updateTask(this.taskService.task.taskIds[index], index)
+        .subscribe();
   }
 
   /**

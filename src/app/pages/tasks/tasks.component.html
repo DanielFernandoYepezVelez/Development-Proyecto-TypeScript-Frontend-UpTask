@@ -14,8 +14,12 @@
 
     <section class="section__project section__task">
         <div class="section__form" *ngFor="let nameTask of taskNames; let i = index">
-            <p> {{ nameTask }} <span> <i (click)="updateTask()" class="far fa-check-circle"></i> <i (click)="deleteTask(i)" class="fas fa-trash-alt"></i> </span> </p>
+            <p> {{ nameTask }} <span> <i (click)="updateTask(i)" class="far fa-check-circle"></i> <i (click)="deleteTask(i)" class="fas fa-trash-alt"></i> </span> </p>
         </div>
+    </section>
+
+    <section>
+        <app-progress></app-progress>
     </section>
 
     <section class="section__project section__buttons">

@@ -13,6 +13,7 @@ import { LandingPageComponent } from './landing-page.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProjectUpdateComponent } from './components/project-update/project-update.component';
+import { ProgressComponent } from './components/progress/progress.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProjectUpdateComponent } from './components/project-update/project-upda
     ProjectsComponent,
     DashboardComponent,
     ProjectUpdateComponent,
+    ProgressComponent,
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 .section__task {
-    margin: 3rem 0;
+    /* margin: 3rem 0; */
 }
 
 .section__task div {
@@ -15,6 +15,7 @@
 
 .section__task p {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 

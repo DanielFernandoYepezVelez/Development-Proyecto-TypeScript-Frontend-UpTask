@@ -52,11 +52,8 @@ export class ProjectService {
     return this.http.put(`${this.url}/project/${projectUrl}/${projectId}`, { name }, {
                 headers: { Authorization: this.token }})
                  .pipe(
-                   tap((res: any) => {
-                     /* El Backend Debe Devolverme El Proyecto Actualizado */
+                   tap(() => {
                      this.loginService.projects.projectNames[indice] = name;
-                     console.log(res);
-                     console.log(indice);
                    }),
                   catchError(() => of(false))
                 );

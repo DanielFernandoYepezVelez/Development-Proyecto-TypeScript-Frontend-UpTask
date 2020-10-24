@@ -1,4 +1,4 @@
-import { from, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -83,6 +83,26 @@ export class TaskService {
                         }),
                         catchError(() => of(false)),
                       );
+  }
+
+  /**
+   * update Task
+   */
+  public updateTask(taskId: number, index: number) {
+    return this.http.patch(`${this.url}/task/${taskId}`, { body: '' }, {
+        headers: { Authorization: this.token }})
+            .pipe(
+              tap(() =>  {
+                let state = 1;
+
+                if(this.task.taskStates[index] === 1) {
+                  state = 0;
+                }
+
+                this.task.taskStates[index] = state;
+              }),
+              catchError(() => of(false)),
+            );
   }
 
   /**
