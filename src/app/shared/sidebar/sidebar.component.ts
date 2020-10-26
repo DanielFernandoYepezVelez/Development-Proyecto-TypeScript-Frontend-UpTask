@@ -8,7 +8,7 @@ import { LoginService } from '../../auth/services/login.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
   private landingPage: HTMLElement;
@@ -19,7 +19,11 @@ export class SidebarComponent implements OnInit {
     return this.loginService.projects.projectNames;
   }
 
-  constructor(private loginService: LoginService, private taskService: TaskService, private router: Router) { }
+  constructor(
+    private loginService: LoginService,
+    private taskService: TaskService,
+    private router: Router
+  ) {}
 
   public ngOnInit(): void {
     this.asideContainer = document.querySelector('#aside');
@@ -31,8 +35,7 @@ export class SidebarComponent implements OnInit {
   }
 
   public hiddenAside(): void {
-    if(this.asideContainer.classList.contains('aside__hidden')) {
-
+    if (this.asideContainer.classList.contains('aside__hidden')) {
       /* Aside Hidden All */
       this.asideContainer.className = 'aside';
 
@@ -42,7 +45,6 @@ export class SidebarComponent implements OnInit {
       /* Project Complete New Width */
       this.projectComplete.classList.add('body__menu--hidden');
     } else {
-
       /* Aside Hidden All */
       this.asideContainer.className = 'aside__hidden';
 
@@ -58,7 +60,12 @@ export class SidebarComponent implements OnInit {
     const projectId = this.loginService.projects.projectIds[indice];
     const projectUrl = this.loginService.projects.projectUrls[indice];
 
-    this.taskService.tasks(projectId).subscribe(
-       () => this.router.navigateByUrl(`/dashboard/tasks/${indice}/${projectUrl}/${projectId}`));
+    this.taskService
+      .tasks(projectId)
+      .subscribe(() =>
+        this.router.navigateByUrl(
+          `/dashboard/tasks/${indice}/${projectUrl}/${projectId}`
+        )
+      );
   }
 }

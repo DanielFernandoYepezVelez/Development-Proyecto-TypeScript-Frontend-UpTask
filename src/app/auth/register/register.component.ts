@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /* Services */
@@ -23,7 +23,11 @@ export class RegisterComponent implements OnInit {
    */
   public formForma: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private registerService: RegisterService,
+    private router: Router
+  ) {
     this.registerFormCreate();
   }
 
@@ -65,7 +69,11 @@ export class RegisterComponent implements OnInit {
   /**
    * Register Form Label Transition
    */
-  private fieldValueTransitionLabel(value: string, index: number, classCss: string): void {
+  private fieldValueTransitionLabel(
+    value: string,
+    index: number,
+    classCss: string
+  ): void {
     if (value.length) {
       this.labels[index].classList.add(classCss);
     } else {
@@ -77,14 +85,25 @@ export class RegisterComponent implements OnInit {
    * Register Form Data Builder And Validation (ANGULAR REACTIVE)
    */
   private registerFormCreate(): void {
-    this.formForma = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
-      repeat_password: ['', [Validators.required, Validators.minLength(4)]]
-    }, {
-      validators: this.statusFieldPasswords('password', 'repeat_password')
-    });
+    this.formForma = this.formBuilder.group(
+      {
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              /^(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            ),
+          ],
+        ],
+        password: ['', [Validators.required, Validators.minLength(4)]],
+        repeat_password: ['', [Validators.required, Validators.minLength(4)]],
+      },
+      {
+        validators: this.statusFieldPasswords('password', 'repeat_password'),
+      }
+    );
   }
 
   /**
@@ -94,17 +113,16 @@ export class RegisterComponent implements OnInit {
    * Hacemos La Lógica Para Validar Ambos Passwords, Antes De Enviar La Data
    */
   private statusFieldPasswords(pass1Name: string, pass2Name: string) {
-
     return (formGroup: FormGroup) => {
       const pass1Control = formGroup.controls[pass1Name];
       const pass2Control = formGroup.controls[pass2Name];
 
-      if(pass1Control.value === pass2Control.value) {
+      if (pass1Control.value === pass2Control.value) {
         pass2Control.setErrors(null);
       } else {
         pass2Control.setErrors({ noEsIgual: true });
       }
-    }
+    };
   }
 
   /**
@@ -115,19 +133,39 @@ export class RegisterComponent implements OnInit {
 
     switch (attribute) {
       case 'name':
-        this.validationTemplateLogicInput('name', 0, 'borderInput', 'Nombre No Válido');
+        this.validationTemplateLogicInput(
+          'name',
+          0,
+          'borderInput',
+          'Nombre No Válido'
+        );
         break;
 
       case 'email':
-        this.validationTemplateLogicInput('email', 1, 'borderInput', 'Correo Eléctronico No Válido');
+        this.validationTemplateLogicInput(
+          'email',
+          1,
+          'borderInput',
+          'Correo Eléctronico No Válido'
+        );
         break;
 
       case 'password':
-        this.validationTemplateLogicInput('password', 2, 'borderInput', 'Contraseña No Válida');
+        this.validationTemplateLogicInput(
+          'password',
+          2,
+          'borderInput',
+          'Contraseña No Válida'
+        );
         break;
 
       case 'repeat_password':
-        this.validationTemplateLogicInput('repeat_password', 3, 'borderInput', 'Contraseñas No Son Iguales');
+        this.validationTemplateLogicInput(
+          'repeat_password',
+          3,
+          'borderInput',
+          'Contraseñas No Son Iguales'
+        );
         break;
     }
   }
@@ -135,18 +173,34 @@ export class RegisterComponent implements OnInit {
   /**
    * Register Form Validate Input Logic
    */
-  private validationTemplateLogicInput(fieldName: string, index: number, classCss: string, message: string = ''): void {
+  private validationTemplateLogicInput(
+    fieldName: string,
+    index: number,
+    classCss: string,
+    message: string = ''
+  ): void {
     // tslint:disable-next-line: max-line-length
-    if (this.formForma.get(fieldName).status === 'VALID' && this.formForma.get(fieldName).dirty && !this.formForma.get(fieldName).invalid && this.formForma.get(fieldName).valid) {
-
-      if (this.labels[index].nextElementSibling || this.inputs[index].classList.contains(classCss)) {
+    if (
+      this.formForma.get(fieldName).status === 'VALID' &&
+      this.formForma.get(fieldName).dirty &&
+      !this.formForma.get(fieldName).invalid &&
+      this.formForma.get(fieldName).valid
+    ) {
+      if (
+        this.labels[index].nextElementSibling ||
+        this.inputs[index].classList.contains(classCss)
+      ) {
         this.inputs[index].classList.remove(classCss);
         this.registerFormTemplateValidate(index);
       }
-
-    } else if (!this.formForma.get(fieldName).valid && this.formForma.get(fieldName).dirty) {
-
-      if (!this.labels[index].nextElementSibling || !this.inputs[index].classList.contains(classCss)) {
+    } else if (
+      !this.formForma.get(fieldName).valid &&
+      this.formForma.get(fieldName).dirty
+    ) {
+      if (
+        !this.labels[index].nextElementSibling ||
+        !this.inputs[index].classList.contains(classCss)
+      ) {
         this.inputs[index].classList.add(classCss);
         this.registerFormTemplateValidate(index, message);
       }
@@ -159,16 +213,23 @@ export class RegisterComponent implements OnInit {
    */
   public saveRegisterFormData(): void {
     // tslint:disable-next-line: max-line-length
-    if (this.formForma.status === 'INVALID' || this.formForma.touched === false || this.formForma.dirty === false || this.formForma.valid === false) {
+    if (
+      this.formForma.status === 'INVALID' ||
+      this.formForma.touched === false ||
+      this.formForma.dirty === false ||
+      this.formForma.valid === false
+    ) {
       this.completeFormValidate();
       return;
     }
 
     /* Response Backend */
-    this.registerService.createUser(this.formForma.value)
-      .subscribe(() => {
+    this.registerService.createUser(this.formForma.value).subscribe(
+      () => {
         this.router.navigateByUrl('/login');
-      },error => this.showAlertError(error.error.error));
+      },
+      (error) => this.showAlertError(error.error.error)
+    );
   }
 
   /**
@@ -187,12 +248,10 @@ export class RegisterComponent implements OnInit {
    */
   private completeFormValidate(): void {
     Object.values(this.formForma.controls).forEach((controlsField, index) => {
-
       if (controlsField.status === 'INVALID' || controlsField.valid === false) {
         this.inputs[index].classList.add('borderInput');
         this.registerFormPositionValidate(index);
       }
-
     });
   }
 
@@ -203,7 +262,10 @@ export class RegisterComponent implements OnInit {
     if (index === 0) {
       this.registerFormTemplateValidate(index, 'Nombre Obligatorio');
     } else if (index === 1) {
-      this.registerFormTemplateValidate(index, 'Correo Eléctronico Obligatorio');
+      this.registerFormTemplateValidate(
+        index,
+        'Correo Eléctronico Obligatorio'
+      );
     } else if (index === 2) {
       this.registerFormTemplateValidate(index, 'Contraseña Obligatoria');
     } else if (index === 3) {
@@ -214,15 +276,23 @@ export class RegisterComponent implements OnInit {
   /**
    * Register Form Template Builder Validate HTML
    */
-  private registerFormTemplateValidate(index: number, mensajeValidate: string = ''): void {
+  private registerFormTemplateValidate(
+    index: number,
+    mensajeValidate: string = ''
+  ): void {
     const small = document.createElement('small');
 
     if (!this.labels[index].nextElementSibling) {
       small.style.color = '#f50808';
       small.innerHTML = mensajeValidate;
-      this.inputs[index].nextElementSibling.insertAdjacentElement('afterend', small);
-
-    } else if (this.labels[index].nextElementSibling && !this.inputs[index].classList.contains('borderInput')) {
+      this.inputs[index].nextElementSibling.insertAdjacentElement(
+        'afterend',
+        small
+      );
+    } else if (
+      this.labels[index].nextElementSibling &&
+      !this.inputs[index].classList.contains('borderInput')
+    ) {
       this.labels[index].nextElementSibling.remove();
     }
   }

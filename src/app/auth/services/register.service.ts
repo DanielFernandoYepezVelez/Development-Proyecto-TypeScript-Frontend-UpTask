@@ -8,12 +8,12 @@ import { IRegister } from '../interfaces/register.interface';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RegisterService {
   private url: string = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public createUser(formRegister: IRegister) {
     return this.http.post(`${this.url}/register`, formRegister);

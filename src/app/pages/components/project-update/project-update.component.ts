@@ -10,7 +10,7 @@ import { LoginService } from '../../../auth/services/login.service';
 @Component({
   selector: 'app-project-update',
   templateUrl: './project-update.component.html',
-  styleUrls: ['./project-update.component.css', '../../css/pages.component.css']
+  styleUrls: ['../../css/pages.component.css'],
 })
 export class ProjectUpdateComponent {
   /*
@@ -40,17 +40,27 @@ export class ProjectUpdateComponent {
   /*
    * Coditionals DOM
    */
-  public get conditionalNameHTML(): boolean { 
-    return this.formForma.get('name').invalid && this.formForma.get('name').dirty;
+  public get conditionalNameHTML(): boolean {
+    return (
+      this.formForma.get('name').invalid && this.formForma.get('name').dirty
+    );
   }
 
   public get requiredNameHTML(): boolean {
-    return this.formUpdateProjectSubmitted && !this.formForma.get('name').dirty && !this.formForma.valid;
+    return (
+      this.formUpdateProjectSubmitted &&
+      !this.formForma.get('name').dirty &&
+      !this.formForma.valid
+    );
   }
 
-  constructor(private loginService: LoginService, private activatedRoute: ActivatedRoute,
-              private formBuilder: FormBuilder, private projectService: ProjectService,
-              private router: Router) {
+  constructor(
+    private loginService: LoginService,
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private projectService: ProjectService,
+    private router: Router
+  ) {
     this.projectFormDataBuild();
   }
 
@@ -73,11 +83,17 @@ export class ProjectUpdateComponent {
     }
 
     /* Send Data For Backend, If Is Right! */
-    this.projectService.updateProject(this.formForma.value.name, this.urlProject, this.idProject, this.indexProject)
-        .subscribe(() => {
-          this.ShowAlert();
-          this.router.navigateByUrl('/dashboard');
-        });
+    this.projectService
+      .updateProject(
+        this.formForma.value.name,
+        this.urlProject,
+        this.idProject,
+        this.indexProject
+      )
+      .subscribe(() => {
+        this.ShowAlert();
+        this.router.navigateByUrl('/dashboard');
+      });
     // this.formForma.reset();
   }
 

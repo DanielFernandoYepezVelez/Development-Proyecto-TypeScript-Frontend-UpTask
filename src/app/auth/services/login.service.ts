@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable, NgZone } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
 
 /* Interfaces */
@@ -17,14 +17,18 @@ import { Project } from '../../pages/models/project.model';
 declare const gapi: any;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
   private auth2: any;
   public projects: Project;
   private url: string = environment.baseUrl;
 
-  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private ngZone: NgZone
+  ) {}
 
   /**
    * User Login Normal
@@ -33,20 +37,20 @@ export class LoginService {
     const { email, password } = formData;
     const loginForm = { email, password };
 
-    return this.http.post(`${this.url}/login`, loginForm)
-               .pipe(
-                 tap((resp: any) => localStorage.setItem('token', resp.token))
-               );
+    return this.http
+      .post(`${this.url}/login`, loginForm)
+      .pipe(tap((resp: any) => localStorage.setItem('token', resp.token)));
   }
 
   /**
    * User Login Google
    */
   public loginGoogle(token: string): Observable<any> {
-    return this.http.post(`${this.url}/login/google`, { token })
-               .pipe(
-                 tap((resp: any) => localStorage.setItem('token', resp.tokenPropio))
-               );
+    return this.http
+      .post(`${this.url}/login/google`, { token })
+      .pipe(
+        tap((resp: any) => localStorage.setItem('token', resp.tokenPropio))
+      );
   }
 
   /**
@@ -56,28 +60,30 @@ export class LoginService {
   public loginRenew(): Observable<boolean> {
     const token: string = localStorage.getItem('token') || '';
 
-    return this.http.get(`${this.url}/login/renew`, {
-      headers: { Authorization: `Bearer ${token}`}})
-              .pipe(
-                tap((resp: any) => {
-                  const projectIds: number[] = [];
-                  const projectUrls: string[] = [];
-                  const projectNames: string[] = [];
+    return this.http
+      .get(`${this.url}/login/renew`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .pipe(
+        tap((resp: any) => {
+          const projectIds: number[] = [];
+          const projectUrls: string[] = [];
+          const projectNames: string[] = [];
 
-                  localStorage.setItem('token', resp.tokenValidado);
-                  resp.projects.forEach( project => {
-                    const { id, url, name } = project;
+          localStorage.setItem('token', resp.tokenValidado);
+          resp.projects.forEach((project) => {
+            const { id, url, name } = project;
 
-                    projectIds.push(id);
-                    projectUrls.push(url);
-                    projectNames.push(name);
-                  });
+            projectIds.push(id);
+            projectUrls.push(url);
+            projectNames.push(name);
+          });
 
-                  this.projects = new Project(projectIds, projectUrls, projectNames);
-                }),
-                map(() => true),
-                catchError(() => of(false))
-              );
+          this.projects = new Project(projectIds, projectUrls, projectNames);
+        }),
+        map(() => true),
+        catchError(() => of(false))
+      );
   }
 
   /**

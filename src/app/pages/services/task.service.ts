@@ -1,6 +1,6 @@
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 /* Interfaces */
@@ -13,7 +13,7 @@ import { Task } from '../models/task.model';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
   public task: Task;
@@ -23,35 +23,37 @@ export class TaskService {
     return `Bearer ${localStorage.getItem('token') || ''}`;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Get Tasks
    * LOGICA PARA UN SERVICIO SINGLETON Y OBTENER LAS TAREAS PARA TODO EL PROYECTO
    */
   public tasks(projectId: number): Observable<object> {
-    return this.http.get(`${this.url}/tasks/${projectId}`, {
-      headers: { Authorization: this.token }})
-              .pipe(
-                tap((resp: any) => {
-                  let taskProjectId: number;
-                  const arrayId: number[] = [];
-                  const arrayName: string[] = [];
-                  const arrayState: number[] = [];
+    return this.http
+      .get(`${this.url}/tasks/${projectId}`, {
+        headers: { Authorization: this.token },
+      })
+      .pipe(
+        tap((resp: any) => {
+          let taskProjectId: number;
+          const arrayId: number[] = [];
+          const arrayName: string[] = [];
+          const arrayState: number[] = [];
 
-                  resp.tasks.forEach(taskComplete => {
-                    const {id, task, state, project_id } = taskComplete;
+          resp.tasks.forEach((taskComplete) => {
+            const { id, task, state, project_id } = taskComplete;
 
-                    arrayId.push(id);
-                    arrayName.push(task);
-                    arrayState.push(state);
-                    taskProjectId = project_id;
-                  });
+            arrayId.push(id);
+            arrayName.push(task);
+            arrayState.push(state);
+            taskProjectId = project_id;
+          });
 
-                  this.task = new Task(arrayId, arrayName, arrayState, taskProjectId);
-                }),
-                catchError(() => of(false)),
-              );
+          this.task = new Task(arrayId, arrayName, arrayState, taskProjectId);
+        }),
+        catchError(() => of(false))
+      );
   }
 
   /**
@@ -59,50 +61,63 @@ export class TaskService {
    * LOGICA PARA UN SERVICIO SINGLETON Y CREAR LAS TAREAS PARA TODO EL PROYECTO
    */
   public createTask(name: ITask, projectId: number): Observable<object> {
-    return this.http.post(`${this.url}/task/${projectId}`, { name }, {
-               headers: { Authorization: this.token }})
-                      .pipe(
-                        tap((res: any) => {
-                          this.task.taskIds.length = 0;
-                          this.task.taskNames.length = 0;
-                          this.task.taskStates.length = 0;
+    return this.http
+      .post(
+        `${this.url}/task/${projectId}`,
+        { name },
+        {
+          headers: { Authorization: this.token },
+        }
+      )
+      .pipe(
+        tap((res: any) => {
+          this.task.taskIds.length = 0;
+          this.task.taskNames.length = 0;
+          this.task.taskStates.length = 0;
 
-                          const arrayTaskIds: number[] = [];
-                          const arrayTaskNames: string[] = [];
-                          const arrayTaskStates: number[] = [];
+          const arrayTaskIds: number[] = [];
+          const arrayTaskNames: string[] = [];
+          const arrayTaskStates: number[] = [];
 
-                          res.tasks.forEach(task => {
-                            arrayTaskIds.push(task.id);
-                            arrayTaskNames.push(task.task);
-                            arrayTaskStates.push(task.state);
-                          });
+          res.tasks.forEach((task) => {
+            arrayTaskIds.push(task.id);
+            arrayTaskNames.push(task.task);
+            arrayTaskStates.push(task.state);
+          });
 
-                          this.task.taskIds = arrayTaskIds;
-                          this.task.taskNames = arrayTaskNames;
-                          this.task.taskStates = arrayTaskStates;
-                        }),
-                        catchError(() => of(false)),
-                      );
+          this.task.taskIds = arrayTaskIds;
+          this.task.taskNames = arrayTaskNames;
+          this.task.taskStates = arrayTaskStates;
+        }),
+        catchError(() => of(false))
+      );
   }
 
   /**
    * update Task
    */
   public updateTask(taskId: number, index: number) {
-    return this.http.patch(`${this.url}/task/${taskId}`, { body: '' }, {
-        headers: { Authorization: this.token }})
-            .pipe(
-              tap(() =>  {
-                let state = 1;
+    return this.http
+      .patch(
+        `${this.url}/task/${taskId}`,
+        { body: '' },
+        {
+          headers: { Authorization: this.token },
+        }
+      )
+      .pipe(
+        tap(() => {
+          let state = 1;
 
-                if(this.task.taskStates[index] === 1) {
-                  state = 0;
-                }
+          if (this.task.taskStates[index] === 1) {
+            state = 0;
+          }
 
-                this.task.taskStates[index] = state;
-              }),
-              catchError(() => of(false)),
-            );
+          this.task.taskStates[index] = state;
+          console.log(this.task.taskStates);
+        }),
+        catchError(() => of(false))
+      );
   }
 
   /**
@@ -110,14 +125,16 @@ export class TaskService {
    * LOGICA PARA UN SERVICIO SINGLETON Y ELIMINAR LAS TAREAS PARA TODO EL PROYECTO
    */
   public deleteTask(taskId: number, indice: number): Observable<object> {
-    return this.http.delete(`${this.url}/task/${taskId}`, {
-       headers: { Authorization: this.token }})
-                  .pipe(
-                    tap(() => {
-                        this.task.taskIds.splice(indice, 1);
-                        this.task.taskNames.splice(indice, 1);
-                        this.task.taskStates.splice(indice, 1);
-                    }),
-                  );
+    return this.http
+      .delete(`${this.url}/task/${taskId}`, {
+        headers: { Authorization: this.token },
+      })
+      .pipe(
+        tap(() => {
+          this.task.taskIds.splice(indice, 1);
+          this.task.taskNames.splice(indice, 1);
+          this.task.taskStates.splice(indice, 1);
+        })
+      );
   }
 }

@@ -29,30 +29,39 @@ export class LoginComponent implements OnInit {
   /**
    * Generals Logics Properties
    */
+  public validateOne = false;
+  public validateTwo = false;
+  public validateFour = false;
   public formForma: FormGroup;
-  public validateOne: boolean = false;
-  public validateTwo: boolean = false;
-  public validateFour: boolean = false;
-  public validateThree: boolean = false;
+  public validateThree = false;
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router, private ngZone: NgZone) {
+  constructor(
+    private router: Router,
+    private ngZone: NgZone,
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
+  ) {
     this.loginFormDataBuild();
   }
-  
+
   ngOnInit(): void {
-    Array.from((this.inputs = document.querySelectorAll('.main__form input')));
-    Array.from((this.labels = document.querySelectorAll('.main__form label')));
-    this.emailPositionInitialRemember();
     /* Prepara El Boton Con Su Id Para Iniciar La Authenticación De Google(IMPORTANTE!!) */
     this.startApp();
+    this.emailPositionInitialRemember();
+    Array.from((this.inputs = document.querySelectorAll('.main__form input')));
+    Array.from((this.labels = document.querySelectorAll('.main__form label')));
   }
 
   /**
    * Input Field Email Position Inital Remember
    */
   private emailPositionInitialRemember(): void {
-    if(this.formForma.get('email').value) {
-      this.fieldValueTransitionLabel(this.formForma.get('email').value, 0, 'label__finally');
+    if (this.formForma.get('email').value) {
+      this.fieldValueTransitionLabel(
+        this.formForma.get('email').value,
+        0,
+        'label__finally'
+      );
     }
   }
 
@@ -77,7 +86,11 @@ export class LoginComponent implements OnInit {
   /**
    * Login Form Transition Label
    */
-  private fieldValueTransitionLabel(value: string, index: number, classCss: string): void {
+  private fieldValueTransitionLabel(
+    value: string,
+    index: number,
+    classCss: string
+  ): void {
     if (value.length) {
       this.labels[index].classList.add(classCss);
     } else {
@@ -90,9 +103,17 @@ export class LoginComponent implements OnInit {
    */
   private loginFormDataBuild(): void {
     this.formForma = this.formBuilder.group({
-      email: [localStorage.getItem('email') || '', [Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
+      email: [
+        localStorage.getItem('email') || '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          ),
+        ],
+      ],
       password: ['', [Validators.required, Validators.minLength(4)]],
-      remember: [false]
+      remember: [false],
     });
   }
 
@@ -100,33 +121,40 @@ export class LoginComponent implements OnInit {
    * Login Form Get Data And Send To Server
    */
   public loginFormDataSaved(): void {
-    if (this.formForma.status === 'INVALID' || this.formForma.dirty === false || this.formForma.valid === false) { 
+    if (
+      this.formForma.status === 'INVALID' ||
+      this.formForma.dirty === false ||
+      this.formForma.valid === false
+    ) {
       Object.values(this.formForma.controls).forEach((controlsField, index) => {
-
-        if (controlsField.status === 'INVALID' || controlsField.valid === false) {
+        if (
+          controlsField.status === 'INVALID' ||
+          controlsField.valid === false
+        ) {
           this.inputs[index].classList.add('borderInput');
           this.validateTwo = this.generalConditional('email');
           this.validateFour = this.generalConditional('password');
         }
-
       });
 
       return;
     }
 
     /* Response Backend */
-    this.loginService.login(this.formForma.value)
-      .subscribe( () =>  {
+    this.loginService.login(this.formForma.value).subscribe(
+      () => {
         this.savedRememberLocalStorage();
         this.router.navigateByUrl('/dashboard');
-        }, error => this.showAlertError(error.error.error));
+      },
+      (error) => this.showAlertError(error.error.error)
+    );
   }
 
   /**
    * Guardar Email En El LocalStorage Si El Usuario Lo Desea
    */
   private savedRememberLocalStorage(): void {
-    if(this.formForma.get('remember').value) {
+    if (this.formForma.get('remember').value) {
       localStorage.setItem('email', this.formForma.get('email').value);
     } else {
       localStorage.removeItem('email');
@@ -218,30 +246,32 @@ export class LoginComponent implements OnInit {
    */
   private startApp(): void {
     gapi.load('auth2', () => {
-
       this.auth2 = gapi.auth2.init({
-        client_id: '24949782543-ks08iocf3mi3tko0gn8ilpgspmb5rtcg.apps.googleusercontent.com',
+        client_id:
+          '24949782543-ks08iocf3mi3tko0gn8ilpgspmb5rtcg.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
       });
 
       this.attachSignin(document.getElementById('googleBtn'));
     });
-  };
+  }
 
   private attachSignin(element) {
+    this.auth2.attachClickHandler(
+      element,
+      {},
+      (googleUser) => {
+        const { id_token } = googleUser.getAuthResponse();
 
-    this.auth2.attachClickHandler(element, {}, (googleUser) => {
-      const { id_token } = googleUser.getAuthResponse();
-
-      this.loginService.loginGoogle(id_token).subscribe(
-        () => {
+        this.loginService.loginGoogle(id_token).subscribe(() => {
           this.ngZone.run(() => {
             this.router.navigateByUrl('/dashboard');
           });
         });
-
-    }, (error) => {
-      alert(JSON.stringify(error, undefined, 2));
-    });
+      },
+      (error) => {
+        alert(JSON.stringify(error, undefined, 2));
+      }
+    );
   }
 }
