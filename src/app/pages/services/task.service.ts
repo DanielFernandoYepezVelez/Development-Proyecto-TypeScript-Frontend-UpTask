@@ -114,7 +114,6 @@ export class TaskService {
           }
 
           this.task.taskStates[index] = state;
-          console.log(this.task.taskStates);
         }),
         catchError(() => of(false))
       );

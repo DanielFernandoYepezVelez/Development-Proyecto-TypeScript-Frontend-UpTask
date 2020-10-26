@@ -106,20 +106,7 @@ export class TasksComponent {
   public updateTask(index: number) {
     this.taskService
       .updateTask(this.taskService.task.taskIds[index], index)
-      .subscribe(() => {
-        let acSuma = 0;
-        this.valueFinal = 0;
-
-        this.taskService.task.taskStates.forEach((elemento) => {
-          if (elemento === 1) {
-            acSuma += 1;
-            this.valueFinal =
-              (acSuma * 100) / this.taskService.task.taskStates.length;
-          }
-        });
-
-        console.log(this.valueFinal);
-      });
+      .subscribe();
   }
 
   /**
