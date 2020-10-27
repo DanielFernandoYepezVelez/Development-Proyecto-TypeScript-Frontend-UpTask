@@ -128,7 +128,7 @@ export class TasksComponent {
           .deleteTask(this.taskService.task.taskIds[index], index)
           .subscribe();
 
-        Swal.fire('Eliminado!', 'Tu Archivo Fue Eliminado.', 'success');
+        Swal.fire('Eliminado!', 'Tu Tarea Fue Eliminada.', 'success');
       }
     });
   }

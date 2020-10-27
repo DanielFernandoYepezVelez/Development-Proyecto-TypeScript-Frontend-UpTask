@@ -39,26 +39,11 @@
 }
 
 .header__ul {
-    top: 0;
-    right: 1.5rem;
-    display: none;
-    width: 5.5rem;
     list-style: none;
-    position: absolute;
-}
-
-.header__figure:hover .header__ul {
-    display: block;
-}
-
-.header__list {
-    width: 100%;
-    margin: .5rem 0;
 }
 
 .header__item {
-    width: 100%;
-    text-decoration: none;
+    cursor: pointer;
 }
 
 

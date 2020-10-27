@@ -21,14 +21,16 @@ html {
 }
 
 body {
+    background-repeat: no-repeat;
     background: rgb(57, 200, 166);
     font-family: var(--primaryLetter), var(--secundaryLetter), sans-serif;
     background: linear-gradient(180deg, rgba(57, 200, 166, 1) 1%, rgba(52, 143, 190, 1) 37%, rgba(71, 130, 186) 71%, rgba(99, 107, 221, 1) 100%);
 }
 
-.body__menu--hidden {
+
+/* .body__menu--hidden {
     min-width: max-content;
-}
+} */
 
 img {
     max-width: 100%;
@@ -54,7 +56,8 @@ a {
 
 /* MEDIA QUERYS GENERALES */
 
-@media all and (max-width: 333px) {
+
+/* @media all and (max-width: 333px) {
     body {
         min-height: 102vh;
     }
@@ -64,4 +67,4 @@ a {
     .body__menu--hidden {
         min-height: 169.8vh;
     }
-}
+} */

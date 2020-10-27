@@ -10,7 +10,7 @@ import { LoginService } from '../../../auth/services/login.service';
 @Component({
   selector: 'app-project-update',
   templateUrl: './project-update.component.html',
-  styleUrls: ['../../css/pages.component.css'],
+  styleUrls: ['./project-update.component.css', '../../css/pages.component.css'],
 })
 export class ProjectUpdateComponent {
   /*

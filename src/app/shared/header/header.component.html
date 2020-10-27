@@ -5,16 +5,10 @@
             <p class="header__paragraph">UpTask - Administrador De Proyectos</p>
         </a>
 
-        <nav class="header__nav">
-            <figure class="header__figure">
-                <img class="header__image" src="./assets/image/profile.png" alt="imageProfile">
-                <ul class="header__ul">
-                    <li class="header__list"><a href="#" class="header__item">Perfil</a></li>
-                    <li class="header__list"><a href="#" class="header__item">Proyectos</a></li>
-                    <li class="header__list"><a href="#" class="header__item">Tareas</a></li>
-                    <li (click)="logout()" class="header__list"><a class="header__item">Cerrar Sesion</a></li>
-                </ul>
-            </figure>
+        <nav>
+            <ul class="header__ul">
+                <li (click)="logout()"><a class="header__item">Cerrar Sesion</a></li>
+            </ul>
         </nav>
     </div>
 </header>

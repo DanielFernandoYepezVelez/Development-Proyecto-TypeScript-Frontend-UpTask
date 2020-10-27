@@ -2,7 +2,8 @@
     display: grid;
     grid-template-rows: 100vh;
     /* grid-template-rows: 169.8vh; */
-    grid-template-columns: 300px auto;
+    /* grid-template-columns: 300px auto; */
+    grid-template-columns: 100px 1fr;
     border: solid 1px var(--lightColor);
 }
 
@@ -15,8 +16,15 @@
 
 /* MEDIA QUERYS */
 
-@media all and (max-width: 473px) {
+@media all and (min-width: 425px) {
+    .main__dashboard {
+        grid-template-columns: 150px 1fr;
+    }
+}
+
+
+/* @media all and (max-width: 473px) {
     .main__dashboard {
         grid-template-rows: 169.8vh;
     }
-}
+} */

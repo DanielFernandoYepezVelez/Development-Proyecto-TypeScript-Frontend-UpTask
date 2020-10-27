@@ -1,4 +1,5 @@
 h2 {
+    font-size: 1rem;
     text-align: center;
 }
 
@@ -7,7 +8,7 @@ h2 {
 
 .barra-avance {
     height: 30px;
-    min-width: 550px;
+    min-width: 200px;
     border: 1px solid var(--lightColor);
 }
 
