@@ -56,15 +56,8 @@ a {
 
 /* MEDIA QUERYS GENERALES */
 
-
-/* @media all and (max-width: 333px) {
+@media all and (min-width: 768px) {
     body {
-        min-height: 102vh;
+        min-width: max-content;
     }
 }
-
-@media all and (max-width: 473px) {
-    .body__menu--hidden {
-        min-height: 169.8vh;
-    }
-} */

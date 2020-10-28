@@ -1,23 +1,19 @@
 .section {
     width: 100%;
-    /* margin: 2rem 0; */
     margin-top: 1rem;
     text-align: center;
 }
 
 .section h2 {
     font-size: 1rem;
-    /* margin-bottom: 1rem; */
     margin: 1rem 0 0.5rem 0;
 }
 
 .section__form {
-    /* width: 93%; */
-    width: 200px;
+    width: 85%;
     display: flex;
-    /* padding: 1rem; */
-    padding: 0.5rem;
     margin: 0 auto;
+    padding: 0.5rem;
     flex-direction: column;
     border: solid 2px var(--lightColor);
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.46);
@@ -35,35 +31,20 @@ input[type="text"] {
 }
 
 input[type="submit"] {
-    /* width: 124px;
-    border: none;
-    outline: none;
-    padding: 1rem;
-    cursor: pointer;
-    border-radius: 20px;
-    background-color: black; */
     width: 106px;
     border: none;
     outline: none;
-    padding: 0.5rem;
     cursor: pointer;
+    padding: 0.5rem;
     border-radius: 10px;
     background-color: var(--darkColor);
 }
 
 .article__form {
-    /* display: grid;
-    height: 100vh;
-    grid-row-gap: 1rem;
-    justify-items: center;
-    /* grid-template-rows: 200px;
-    grid-template-rows: 200px 340px 60px; */
     display: grid;
     height: 100vh;
     grid-row-gap: 1rem;
     justify-items: center;
-    /* 340px */
-    /* grid-template-rows: 170px 270px 50px 1fr; */
     grid-template-rows: 170px 1fr 1fr;
 }
 
@@ -74,35 +55,32 @@ input[type="submit"] {
 
 /* MEDIA QUERY GENERALS ASIDE HIDDEN */
 
-@media all and (min-width: 375px) {
-    .section__form {
-        width: 85%;
+@media all and (min-width: 768px) {
+    .section h2 {
+        font-size: 1.2rem;
     }
-}
-
-@media all and (min-width: 480px) {
     .section__form {
         width: 80%;
     }
-    input[type="submit"] {
-        width: 150px;
-    }
-}
-
-@media all and (min-width: 646px) {
-    .article__form {
-        /* height: 76.4vh; */
-    }
-    .section {
-        width: 646px;
-    }
-    input[type="submit"] {
-        width: 200px;
+    .section__buttons {
+        min-width: 80%;
     }
 }
 
 @media all and (min-width: 1024px) {
     .section__form {
-        width: 94%;
+        width: 540px;
+    }
+    .section__buttons {
+        min-width: 540px;
+    }
+    input[type="text"] {
+        padding: 0.8rem;
+    }
+    input[type="submit"] {
+        width: 130px;
+        padding: 0.8rem;
+        font-size: 1.1rem;
+        border-radius: 15px;
     }
 }

@@ -1,3 +1,10 @@
 .section__project .section__form .input__personal {
     width: 135px;
 }
+
+@media all and (min-width: 1024px) {
+    .section__project .section__form .input__personal {
+        width: 165px;
+        font-size: 1rem;
+    }
+}
