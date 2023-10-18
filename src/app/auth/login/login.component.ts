@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     Array.from((this.labels = document.querySelectorAll('.main__form label')));
     this.emailPositionInitialRemember();
     /* Prepara El Boton Con Su Id Para Iniciar La Authenticación De Google(IMPORTANTE!!) */
-    this.startApp();
+    // this.startApp();
   }
 
   /**
