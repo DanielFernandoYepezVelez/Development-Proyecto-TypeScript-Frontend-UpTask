@@ -90,13 +90,16 @@ export class LoginService {
    * Logout De Google - Delete Token LocalStorage
    */
   public logout(): void {
-    this.auth2 = gapi.auth2.getAuthInstance();
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
 
-    this.auth2.signOut().then(() => {
+    // this.auth2 = gapi.auth2.getAuthInstance();
+
+    /* this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
         localStorage.removeItem('token');
         this.router.navigate(['/login']);
       });
-    });
+    }); */
   }
 }
